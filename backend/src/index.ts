@@ -1,12 +1,15 @@
 import express from "express";
 import http from "http";
+import dotenv from "dotenv";
+
+dotenv.config();
+
+const port = process.env.SERVER_PORT;
 
 const app = express();
 
-const port = 8083;
-
 app.get( "/", ( req, res ) => {
-    res.send( "Hello world!Hlfffffssdd" );
+    res.send( "Hello world!Hlff" );
 } );
 
 app.listen( port, () => {
