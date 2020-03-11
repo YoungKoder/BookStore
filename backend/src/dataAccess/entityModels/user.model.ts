@@ -1,5 +1,5 @@
 import mongoose, { Schema } from 'mongoose';
-import { User } from '../entityInnerfaces/userInterface';
+import { User } from '../entityInnerfaces/user.interface';
 
 const UserSchema: Schema = new Schema({
     email: { 
