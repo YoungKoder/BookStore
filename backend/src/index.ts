@@ -1,8 +1,8 @@
 import express from "express";
 import dotenv from "dotenv";
 //import {conectDb, addConnection} from "../src/dataAccess/database/databaseConect";
-import { User } from '../src/dataAccess/entityInnerfaces/userInterface';
-import userModel  from "./dataAccess/entityModels/userModel";
+import { User } from './dataAccess/entityInnerfaces/user.interface';
+import userModel  from "./dataAccess/entityModels/user.model";
 import { getMaxListeners } from "cluster";
 import mongoose from "mongoose";
 import { addConnection } from "./dataAccess/database/databaseConect";
