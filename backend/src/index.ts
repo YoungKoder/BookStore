@@ -1,19 +1,19 @@
 import express from "express";
 import dotenv from "dotenv";
-//import {conectDb, addConnection} from "../src/dataAccess/database/databaseConect";
 import { User } from './dataAccess/entityInnerfaces/user.interface';
 import userModel  from "./dataAccess/entityModels/user.model";
 import { getMaxListeners } from "cluster";
 import mongoose from "mongoose";
 import { addConnection } from "./dataAccess/database/databaseConect";
-
+import routes from "./shared/routes/routes";
 dotenv.config();
 
 const port = process.env.SERVER_PORT;
 
 const app = express();
 
-//conectDb();
+app.use(routes);
+
 addConnection();
 console.log("Mongoose connected");
 mongoose.connect("mongodb://localhost:27017/usersdb", { useNewUrlParser: true });
