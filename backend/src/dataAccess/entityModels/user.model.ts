@@ -1,7 +1,13 @@
 import mongoose, { Schema } from 'mongoose';
 import { User } from '../entityInnerfaces/user.interface';
+import { Role } from '../../shared/enums/role.enum';
 
 const UserSchema: Schema = new Schema({
+    userName:{
+        type:String,
+        unique:true,
+        required:true
+    },
     email: { 
         type: String, 
         required: true, 
@@ -22,9 +28,18 @@ const UserSchema: Schema = new Schema({
         type: String, 
         required: true
     },
+    createdDate:{
+        type:Date,
+        default:Date.now
+    },
     role:{
-        type:String,
-        required: true
+        type:Role,
+        required: true,
+        default:Role.User
+    },
+    removed_at:{
+        type:Boolean,
+        defafult:false
     }
 });
 
