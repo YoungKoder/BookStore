@@ -1,4 +1,5 @@
 import express from "express";
+import userModel from "../../dataAccess/entityModels/user.model";
 
 const router = express.Router();
 
@@ -7,11 +8,13 @@ router.get('/auth',(req,res)=>{
 });
 
 router.post('/auth',(req,res)=>{
-    console.log(req.body);
-    res.send({
-        type:'POST',
-        name: req.body.name
-    });
+    userModel.create(req.body)
+    .then(result => res.send(result))
+    
+    // res.send({
+    //     type:'POST',
+    //     name: req.body.name
+    // });
 });
 
 router.get('/authors',(req,res)=>{

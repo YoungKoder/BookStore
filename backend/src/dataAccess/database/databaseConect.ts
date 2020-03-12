@@ -1,10 +1,10 @@
 import mongoose from 'mongoose';
-import {config} from "../../config";
+// import {config} from "../../config";
 
 
 export function addConnection(){
-    const url = config.DB_CONNECTION_STRING + config.DB_NAME;
-    return new Promise((resolve, reject)=>{
-        resolve(()=> mongoose.connect(url))
-    })
+    const url = process.env.DB_CONNECTION_STRING + process.env.DB_NAME;
+    mongoose.connect(url)
+    .then(() => console.log("Conection was succes"))
+    .catch((err) => console.error(err))
 }

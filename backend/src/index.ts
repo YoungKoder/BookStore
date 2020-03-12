@@ -13,18 +13,23 @@ import routes from "./shared/routes/routes";
 
 import { addConnection } from "./dataAccess/database/databaseConect";
 
+
+
 dotenv.config();
 
 const port = process.env.SERVER_PORT;
 
 const app = express();
 
+// const url = process.env.DB_CONNECTION_STRING + process.env.DB_NAME;
+// mongoose.connect(url)
+// .then(() => console.log("Conection was succes"))
+// .catch((err) => console.error(err))
+
 app.use(bodyParser.json());
 app.use(routes);
 
-addConnection()
-.then(() => console.log("Conection was succes"))
-.catch((err) => console.error(err))
+addConnection();
 
 
 app.get( "/", ( req, res ) => {
