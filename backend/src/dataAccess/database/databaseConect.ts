@@ -1,5 +1,10 @@
 import mongoose from 'mongoose';
+import {config} from "../../config";
+
 
 export function addConnection(){
-    mongoose.connect("mongodb://localhost:27017/usersdb");
+    const url = config.DB_CONNECTION_STRING + config.DB_NAME;
+    return new Promise((resolve, reject)=>{
+        resolve(()=> mongoose.connect(url))
+    })
 }
