@@ -1,11 +1,17 @@
+//import modules from package
 import express from "express";
 import dotenv from "dotenv";
+import mongoose from "mongoose";
+import bodyParser from "body-parser";
+
+//import models and interfaces
 import { User } from './dataAccess/entityInnerfaces/user.interface';
 import userModel  from "./dataAccess/entityModels/user.model";
-import { getMaxListeners } from "cluster";
-import mongoose from "mongoose";
-import { addConnection } from "./dataAccess/database/databaseConect";
+
+//import routes
 import routes from "./shared/routes/routes";
+
+import { addConnection } from "./dataAccess/database/databaseConect";
 
 dotenv.config();
 
@@ -13,6 +19,7 @@ const port = process.env.SERVER_PORT;
 
 const app = express();
 
+app.use(bodyParser.json());
 app.use(routes);
 
 addConnection()
