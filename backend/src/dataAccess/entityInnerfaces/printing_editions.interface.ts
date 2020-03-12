@@ -1,12 +1,14 @@
 import {Document} from 'mongoose';
+import mongoose from 'mongoose';
+import { PrintingEditionType } from '../../shared/enums/printingEditionType.enum';
 
 export interface PrintingEditions extends Document{
-    name:string,
-    description: string | "",
-    cover_image: string,
-    removed_at: Date,
-    type: string,
+    title:string,
+    description: string,
+    cover_image?: string,
+    removed_at?: Boolean,
+    type: PrintingEditionType,
     price: number,
     currency: string,
-    author_ids: Object
+    author_ids: mongoose.Schema.Types.ObjectId
 }

@@ -1,37 +1,41 @@
 import mongoose, { Schema } from 'mongoose';
 import { PrintingEditions } from '../entityInnerfaces/printing_editions.interface';
+import { PrintingEditionType } from '../../shared/enums/printingEditionType.enum';
 
-const printingEditions: Schema = new Schema({
-    name: { 
+const printingEdition: Schema = new Schema({
+    title: { 
         type: String, 
-        required: true, 
-        unique: true 
+        required: true
     },
     description:{
         type: String,
         required: true 
     }, 
     cover_image: { 
-        type: String, 
-        required: true 
+        type: String
     },
     removed_at: { 
-        type: Date, 
-        required: true 
+        type: Boolean, 
+        default:false
     },
     type:{
-        type: String, 
+        type: PrintingEditionType, 
         required: true
     },
     currency:{
         type: String,
-        required:true
+        default:'USD'
     },
     price:{
         type:Number,
-        required: true
-    }
+        required: true,
+    },
+    author_ids:[{
+        type:mongoose.Schema.Types.ObjectId, 
+        ref: 'Author', 
+        required:true
+    }]
 });
 
-const printingEditionsModel = mongoose.model<PrintingEditions>('PrintingEditions', printingEditions);
-export default printingEditionsModel;
+const printingEditionModel = mongoose.model<PrintingEditions>('PrintingEdition', printingEdition);
+export default printingEditionModel;
