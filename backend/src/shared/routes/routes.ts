@@ -1,5 +1,8 @@
-import express from "express";
+import express, { response } from "express";
 import userModel from "../../dataAccess/entityModels/user.model";
+import {getHashPassword} from "../../utils/hashingPassword.util";
+import bcrypt from "bcrypt";
+
 
 const router = express.Router();
 
@@ -8,13 +11,10 @@ router.get('/auth',(req,res)=>{
 });
 
 router.post('/auth',(req,res)=>{
-    userModel.create(req.body)
-    .then(result => res.send(result))
-    
-    // res.send({
-    //     type:'POST',
-    //     name: req.body.name
-    // });
+    console.log(req.body.password_hash);
+    const crypt = getHashPassword(req.body, req.body.password_hash) 
+    .then(response => userModel.create(response)
+    .then(result => res.send(result)));
 });
 
 router.get('/authors',(req,res)=>{
