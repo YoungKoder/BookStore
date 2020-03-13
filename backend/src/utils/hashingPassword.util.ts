@@ -1,5 +1,5 @@
 import bcrypt from "bcrypt";
-import { User } from "../dataAccess/entityInnerfaces/user.interface";
+import { User } from "../shared/interfaces/entityInnerfaces/user.interface";
 
 export async function getHashPassword (user:User, _password:string): Promise<User>{
     let resHashCode:string;

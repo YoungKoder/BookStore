@@ -1,5 +1,5 @@
 import mongoose, { Schema } from 'mongoose';
-import { PrintingEditions } from '../entityInnerfaces/printing_editions.interface';
+import { PrintingEditions } from '../../shared/interfaces/entityInnerfaces/printing_editions.interface';
 import { PrintingEditionType } from '../../shared/enums/printingEditionType.enum';
 
 const printingEdition: Schema = new Schema({
