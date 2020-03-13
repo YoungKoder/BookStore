@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import bodyParser from "body-parser";
 import { Controller } from "./shared/interfaces/controller.interface";
+import {errorMiddleware} from "./shared/middleware/error.middleware";
 
 export default class App{
     public app:express.Application;
@@ -13,12 +14,16 @@ export default class App{
 
         this.initializeMiddlewares();
         this.initializeControllers(controllers);
+        this.initializeErrorHandling();
     }
 
     private initializeMiddlewares(){
         this.app.use(bodyParser.json())
     }
 
+    private initializeErrorHandling(){
+        this.app.use(errorMiddleware)
+    }
     private initializeControllers(controllers:Controller[]){
         controllers.forEach((controller:Controller)=>{
             this.app.use('/',controller.router)
