@@ -2,7 +2,7 @@ import * as express from 'express';
 import {User} from "../../shared/interfaces/entityInnerfaces/user.interface";
 import userModel from "../../dataAccess/entityModels/user.model";
 import {Controller} from "../../shared/interfaces/controller.interface";
-import {getHashPassword} from "../../utils/hashingPassword.util";
+import {getHashPassword} from "../../shared/services/bcrypt.service";
 import {HttpExeption} from "../../shared/exeptions/HttpExeption";
 
 export class UserController implements Controller{
@@ -26,11 +26,10 @@ export class UserController implements Controller{
             })
     }
 
-    private addUser = (req:express.Request, res:express.Response, next:express.NextFunction)=>{
-        const crypt = getHashPassword(req.body, req.body.password_hash)
-            .then(response => userModel.create(response)
-                .then(result => res.send(result))
-                .catch(err => next(new HttpExeption(422, err.message))));
+    private addUser = async (req:express.Request, res:express.Response, next:express.NextFunction)=>{
+        let result = await getHashPassword(req.body);
+        userModel.create(result);
+        res.send(result);
     }
 }
 

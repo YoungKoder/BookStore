@@ -3,7 +3,7 @@ import {UserController} from "./features/users/user.controller";
 import App from './app';
 
 //import routes
-import routes from "./shared/routes/routes";
+// import routes from "./shared/routes/routes";
 
 import { addConnection } from "./dataAccess/database/databaseConect";
 
