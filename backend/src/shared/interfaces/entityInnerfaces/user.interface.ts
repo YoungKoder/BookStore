@@ -1,5 +1,5 @@
 import {Document} from 'mongoose';
-import { Role } from '../../shared/enums/role.enum';
+import { Role } from '../../enums/role.enum';
 
 export interface User extends Document{
     userName:string,

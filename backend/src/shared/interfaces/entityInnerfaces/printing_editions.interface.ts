@@ -1,6 +1,6 @@
 import {Document} from 'mongoose';
 import mongoose from 'mongoose';
-import { PrintingEditionType } from '../../shared/enums/printingEditionType.enum';
+import { PrintingEditionType } from '../../enums/printingEditionType.enum';
 
 export interface PrintingEditions extends Document{
     title:string,

@@ -1,5 +1,5 @@
 import mongoose, { Schema } from 'mongoose';
-import { Author } from '../entityInnerfaces/authors.interface';
+import { Author } from '../../shared/interfaces/entityInnerfaces/authors.interface';
 
 const AuthorScheme: Schema = new Schema({
     name: { 

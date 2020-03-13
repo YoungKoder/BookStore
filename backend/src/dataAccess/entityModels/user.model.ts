@@ -1,5 +1,5 @@
 import mongoose, { Schema } from 'mongoose';
-import { User } from '../entityInnerfaces/user.interface';
+import { User } from '../../shared/interfaces/entityInnerfaces/user.interface';
 import { Role } from '../../shared/enums/role.enum';
 
 const UserSchema: Schema = new Schema({
