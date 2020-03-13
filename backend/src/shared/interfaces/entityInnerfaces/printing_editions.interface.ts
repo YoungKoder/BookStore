@@ -2,7 +2,7 @@ import {Document} from 'mongoose';
 import mongoose from 'mongoose';
 import { PrintingEditionType } from '../../enums/printingEditionType.enum';
 
-export interface PrintingEditions extends Document{
+export interface PrintingEdition extends Document{
     title:string,
     description: string,
     cover_image?: string,

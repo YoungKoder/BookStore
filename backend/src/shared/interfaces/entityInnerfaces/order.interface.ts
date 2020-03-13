@@ -1,11 +1,13 @@
 import { User } from './user.interface';
 import {Document} from 'mongoose';
 import mongoose from 'mongoose';
+import { OrderItem } from './order-item.interface';
+import { Payment } from './payment.interface';
 
-export interface Order{
-    user_id:User,
-    description:string,
-    date:Date,
-    isRemoved:Boolean,
-    items: Object
+export interface Order extends Document{
+    user: User,
+    description: string,
+    date: Date,
+    orderItems: Array<OrderItem>,
+    payment: Payment
 }
