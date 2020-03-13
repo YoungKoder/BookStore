@@ -7,7 +7,7 @@ export default class App{
     public app:express.Application;
     public port: string;
 
-    constructor(controllers:Array<Controller>){
+    constructor(controllers:Controller[]){
         this.app = express();
         this.port = process.env.SERVER_PORT;
 
@@ -19,7 +19,7 @@ export default class App{
         this.app.use(bodyParser.json())
     }
 
-    private initializeControllers(controllers:Array<Controller>){
+    private initializeControllers(controllers:Controller[]){
         controllers.forEach((controller:Controller)=>{
             this.app.use('/',controller.router)
         })
