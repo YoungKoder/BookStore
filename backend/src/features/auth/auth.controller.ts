@@ -1,9 +1,10 @@
 import * as express from 'express';
 import { Controller } from '../../shared/interfaces/controller.interface';
 import userModel from "../../dataAccess/entityModels/user.model";
-import {doesUserAlreadyExist, addUser } from "../../shared/services/registration.service";
+import {addUser, logInUser } from "../../shared/services/auth.service";
 import { User } from '../../shared/interfaces/entityInnerfaces/user.interface';
 import {UserWithThisEmailAlreadyExist} from "../../shared/exeptions/UserExist.exeption";
+import { WrongCredentialsException } from '../../shared/exeptions/WrongCredentials.exeption';
 
 export class AuthController implements Controller{
     public path = '/auth';
@@ -16,16 +17,27 @@ export class AuthController implements Controller{
 
     private initializeRoutes(){
         this.router.post(`${this.path}/register`, this.registration);
-        // this.router.post(`${this.path}/loginIn`, this.loginIn);
+        this.router.post(`${this.path}/loginIn`, this.loginIn);
     }
 
     private registration = async(req:express.Request,res:express.Response, next:express.NextFunction)=>{
         const userData:User = req.body;
 
-        let doesUserExist = await doesUserAlreadyExist(userData);
-        if(doesUserExist){ 
-            const err = new UserWithThisEmailAlreadyExist();
-            res.send({error:err.message});
+        let UserDB = await addUser(userData);
+        console.log(UserDB);
+        if(!UserDB){
+            next(new UserWithThisEmailAlreadyExist());
+            return;
         }
+        res.send(UserDB);
+    }
+
+    private loginIn = async(req:express.Request,res:express.Response, next:express.NextFunction)=>{
+        const UserDB = await logInUser(req.body);
+        if(!UserDB){
+            next(new WrongCredentialsException());
+            return;
+        }
+        res.send(UserDB);
     }
 }

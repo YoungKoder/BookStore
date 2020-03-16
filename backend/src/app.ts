@@ -2,7 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import bodyParser from "body-parser";
 import { Controller } from "./shared/interfaces/controller.interface";
-import {errorMiddleware, errorMiddlewareUserExist} from "./shared/middleware/error.middleware";
+import {errorMiddleware, errorMiddlewareUserExist, errorMiddlewareWrongCredential} from "./shared/middleware/error.middleware";
 
 
 export default class App{
@@ -24,7 +24,8 @@ export default class App{
 
     private initializeErrorHandling(){
         this.app.use(errorMiddleware);
-        this.app.use(errorMiddlewareUserExist)
+        this.app.use(errorMiddlewareUserExist);
+        this.app.use(errorMiddlewareWrongCredential);
     }
     private initializeControllers(controllers:Controller[]){
         controllers.forEach((controller:Controller)=>{

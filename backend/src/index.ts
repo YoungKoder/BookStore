@@ -6,6 +6,7 @@ import App from './app';
 // import routes from "./shared/routes/routes";
 
 import { addConnection } from "./dataAccess/database/databaseConect";
+import { AuthController } from "./features/auth/auth.controller";
 
 
 addConnection();
@@ -16,7 +17,8 @@ const port = process.env.SERVER_PORT;
 // app.use(routes);
 
 const app = new App([
-    new UserController()
+    new UserController(),
+    new AuthController()
 ])
 
 app.listen();
