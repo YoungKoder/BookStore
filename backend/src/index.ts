@@ -1,13 +1,24 @@
-import express from "express";
-const app = express();
+import dotenv from "dotenv";
+import {UserController} from "./features/users/user.controller";
+import App from './app';
 
-const port = 8083;
+//import routes
+// import routes from "./shared/routes/routes";
 
-app.get( "/", ( req, res ) => {
-    res.send( "Hello world!Hhh" );
-} );
+import { addConnection } from "./dataAccess/database/databaseConect";
 
-app.listen( port, () => {
-    // tslint:disable-next-line:no-console
-    console.log( `server started at http://localhost:${ port }` );
-} );
+
+addConnection();
+
+dotenv.config();
+const port = process.env.SERVER_PORT;
+
+// app.use(routes);
+
+const app = new App([
+    new UserController()
+])
+
+app.listen();
+
+
