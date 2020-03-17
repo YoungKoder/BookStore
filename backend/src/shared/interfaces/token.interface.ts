@@ -1,7 +1,10 @@
-interface TokenData{
+import { Role } from "../enums/role.enum";
+
+export interface TokenData{
     token:string;
     expiresIn:number;
 }
-interface DataStoredInToken{
-    _id:string;
+export interface DataStoredInToken{
+    userId:string,
+    role:Role
 }

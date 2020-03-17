@@ -1,10 +1,11 @@
 import * as express from 'express';
 import { Controller } from '../../shared/interfaces/controller.interface';
 import userModel from "../../dataAccess/entityModels/user.model";
-import {addUser, logInUser } from "../../shared/services/auth.service";
+import {addUser, logInUser,createCookie } from "../../shared/services/auth.service";
 import { User } from '../../shared/interfaces/entityInnerfaces/user.interface';
 import {UserWithThisEmailAlreadyExist} from "../../shared/exeptions/UserExist.exeption";
 import { WrongCredentialsException } from '../../shared/exeptions/WrongCredentials.exeption';
+import { createToken } from '../../shared/services/token.service';
 
 export class AuthController implements Controller{
     public path = '/auth';
@@ -22,22 +23,26 @@ export class AuthController implements Controller{
 
     private registration = async(req:express.Request,res:express.Response, next:express.NextFunction)=>{
         const userData:User = req.body;
-
-        let UserDB = await addUser(userData);
-        console.log(UserDB);
-        if(!UserDB){
+        let userEntity = await addUser(userData);
+        console.log(userEntity);
+        if(!userEntity){
             next(new UserWithThisEmailAlreadyExist());
             return;
         }
-        res.send(UserDB);
+        let tokenData = await createToken(userEntity);
+        res.setHeader('Set-Cookie',[createCookie(tokenData)]);
+        res.send(userEntity);
     }
 
     private loginIn = async(req:express.Request,res:express.Response, next:express.NextFunction)=>{
-        const UserDB = await logInUser(req.body);
-        if(!UserDB){
+        const userData:User = req.body;
+        const userDb = await logInUser(userData);
+        if(!userDb){
             next(new WrongCredentialsException());
             return;
         }
-        res.send(UserDB);
+        let tokenData = await createToken(userDb);
+        res.setHeader('Set-Cookie',[createCookie(tokenData)]);
+        res.send({userDb, token: tokenData.token});
     }
 }

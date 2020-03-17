@@ -1,5 +1,5 @@
 import express from "express";
-import dotenv from "dotenv";
+import cookieParser from 'cookie-parser';
 import bodyParser from "body-parser";
 import { Controller } from "./shared/interfaces/controller.interface";
 import {errorMiddleware, errorMiddlewareUserExist, errorMiddlewareWrongCredential} from "./shared/middleware/error.middleware";
@@ -19,7 +19,8 @@ export default class App{
     }
 
     private initializeMiddlewares(){
-        this.app.use(bodyParser.json())
+        this.app.use(bodyParser.json());
+        this.app.use(cookieParser());
     }
 
     private initializeErrorHandling(){

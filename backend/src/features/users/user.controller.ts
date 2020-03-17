@@ -21,6 +21,7 @@ export class UserController implements Controller{
 
     private getAllUsers = (req:express.Request, res:express.Response)=>{
         this.user.find()
+        
             .then((users)=>{
                 res.send(users)
             })
