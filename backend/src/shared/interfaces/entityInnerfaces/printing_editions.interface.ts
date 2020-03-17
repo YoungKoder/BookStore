@@ -1,6 +1,7 @@
 import {Document} from 'mongoose';
 import mongoose from 'mongoose';
 import { PrintingEditionType } from '../../enums/printingEditionType.enum';
+import { Currency } from '../../enums/curency.enum';
 
 export interface PrintingEdition extends Document{
     title:string,
@@ -9,6 +10,6 @@ export interface PrintingEdition extends Document{
     removed_at?: Boolean,
     type: PrintingEditionType,
     price: number,
-    currency: string,
+    currency: Currency,
     author_ids: mongoose.Schema.Types.ObjectId
 }

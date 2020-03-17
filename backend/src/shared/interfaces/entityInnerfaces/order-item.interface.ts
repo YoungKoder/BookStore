@@ -1,8 +1,9 @@
 import { PrintingEdition } from './printing_editions.interface';
-export interface OrderItem {
+import { Currency } from '../../enums/curency.enum';
+import {Document} from 'mongoose';
+export interface OrderItem extends Document{
     amount: number,
-    // todo types enum currency
-    currency:0 | 1 | 2 | 3,
-    printingEdition: PrintingEdition,
+    currency:Currency,
+    printingEdition: Array<PrintingEdition>,
     count: number
 }

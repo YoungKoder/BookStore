@@ -19,6 +19,7 @@ export class AuthController implements Controller{
     private initializeRoutes(){
         this.router.post(`${this.path}/register`, this.registration);
         this.router.post(`${this.path}/loginIn`, this.loginIn);
+        this.router.post(`${this.path}/logout`, this.loggingOut);
     }
 
     private registration = async(req:express.Request,res:express.Response, next:express.NextFunction)=>{
@@ -44,5 +45,10 @@ export class AuthController implements Controller{
         let tokenData = await createToken(userDb);
         res.setHeader('Set-Cookie',[createCookie(tokenData)]);
         res.send({userDb, token: tokenData.token});
+    }
+
+    private loggingOut = (req:express.Request, res:express.Response)=>{
+        res.setHeader('Set-Cookie', ['Authorization=;Max-age=0']);
+        res.sendStatus(200);
     }
 }
