@@ -6,3 +6,13 @@ export const addNewPrintingEdition = async (edition:PrintingEdition):Promise<Pri
     let editionEntity = await printingEditionModel.create(editionData);
     return editionEntity;
 } 
+export const deletePrintingEdition = async(id:string):Promise<PrintingEdition>=>{
+    const editionData = await findPrintingEditionByID(id);
+    editionData.removed_at = true;
+    const editionEntity = await printingEditionModel.create(editionData);
+    return editionEntity;
+}
+export const findPrintingEditionByID = async(id:string):Promise<PrintingEdition>=>{
+    let printingEditionEntity = await printingEditionModel.findById(id);
+    return printingEditionEntity;
+}

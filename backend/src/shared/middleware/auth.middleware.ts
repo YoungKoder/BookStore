@@ -6,7 +6,7 @@ import userModel from '../../dataAccess/entityModels/user.model';
 import { WrongCredentialsException } from '../exeptions/WrongCredentials.exeption';
 import { WrongAuthenticationTokenException } from '../exeptions/WrongAuthenticationToken';
 
-const authMiddleware = async(req: RequestWithUser, res:Response, next:NextFunction )=>{
+export const authMiddleware = async(req: RequestWithUser, res:Response, next:NextFunction )=>{
     const cookies = request.cookies;
     if(cookies && cookies.Authorization){
         const secret = process.env.JWT_SECRET;
