@@ -16,6 +16,7 @@ export class PrintingEditionsController implements Controller{
         this.router.get(`${this.path}`, this.getAllPrintingEd);
         this.router.get(`${this.path}/:id`, this.getThePrintingEdByID);
         this.router.post(`${this.path}`, this.addNewPrintingEdition);
+        this.router.delete(`${this.path}/:id`, this.deletePrintingEdByID);
     }
 
     private getAllPrintingEd = async(req:express.Request,res:express.Response,next:express.NextFunction)=>{
@@ -33,5 +34,8 @@ export class PrintingEditionsController implements Controller{
         const editionData = req.body;
         const editionEntity = await addNewPrintingEdition(editionData);
         res.send(editionEntity);
+    }
+    private deletePrintingEdByID = async(req:express.Request,res:express.Response)=>{
+        
     }
 }
