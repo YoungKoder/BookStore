@@ -1,31 +1,28 @@
-import { NextFunction, Response, request } from 'express';
-import { RequestWithUser } from "../interfaces/requestWithUser.interface";
+import { NextFunction, Response, Request } from 'express';
 import jwt from "jsonwebtoken";
 import { DataStoredInToken } from '../interfaces/token.interface';
 import userModel from '../../dataAccess/entityModels/user.model';
-import { WrongCredentialsException } from '../exeptions/WrongCredentials.exeption';
-import { WrongAuthenticationTokenException } from '../exeptions/WrongAuthenticationToken';
 
-export const authMiddleware = async(req: RequestWithUser, res:Response, next:NextFunction )=>{
-    const cookies = request.cookies;
-    if(cookies && cookies.Authorization){
+export const authMiddleware = async(req:Request,res:Response, next:NextFunction)=>{
+    const header = req.headers['authorization'];
+    if(header){
+        const bearer = header.split(" ");
+        const token = bearer[1];
         const secret = process.env.JWT_SECRET;
         try{
-            const verificationResponse = jwt.verify(cookies.Authorization,secret) as DataStoredInToken;
+            const verificationResponse = jwt.verify(token,secret) as DataStoredInToken;
 
             const id = verificationResponse.userId;
-            const user = await userModel.findById(id);
-            console.log(req.user);
-            if(user){
-                req.user = user;
+            const userEntity = await userModel.findById(id);
+            if(userEntity){
                 next();
             }else{
-                next(new WrongAuthenticationTokenException());
+                res.send(403);
             }
         }catch{
-            next(new WrongAuthenticationTokenException());
+            res.send(403);
         }
     }else{
-        next(new WrongCredentialsException())
+        res.status(403);
     }
 }

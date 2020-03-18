@@ -16,3 +16,7 @@ export const findPrintingEditionByID = async(id:string):Promise<PrintingEdition>
     let printingEditionEntity = await printingEditionModel.findById(id);
     return printingEditionEntity;
 }
+export const modifyPrintingEdition = async(id:string, printingEditionNewData:PrintingEdition):Promise<PrintingEdition>=>{
+    const printingEditionEntity = await printingEditionModel.findByIdAndUpdate(id,printingEditionNewData,{new:true} );
+    return printingEditionEntity;
+}

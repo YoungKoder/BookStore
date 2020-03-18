@@ -31,24 +31,24 @@ export class AuthController implements Controller{
             return;
         }
         let tokenData = await createToken(userEntity);
-        res.setHeader('Set-Cookie',[createCookie(tokenData)]);
-        res.send(userEntity);
+        res.setHeader('Authorization',[`Bearer ${tokenData.token}`]);
+        res.send({user:userEntity});
     }
 
     private loginIn = async(req:express.Request,res:express.Response, next:express.NextFunction)=>{
         const userData:User = req.body;
-        const userDb = await logInUser(userData);
-        if(!userDb){
+        const userEntity = await logInUser(userData);
+        if(!userEntity){
             next(new WrongCredentialsException());
             return;
         }
-        let tokenData = await createToken(userDb);
-        res.setHeader('Set-Cookie',[createCookie(tokenData)]);
-        res.send({userDb, token: tokenData.token});
+        let tokenData = await createToken(userEntity);
+        res.setHeader('Authorization',[`Bearer ${tokenData.token}`] );
+        res.send({user:userEntity});
     }
 
     private loggingOut = (req:express.Request, res:express.Response)=>{
-        res.setHeader('Set-Cookie', ['Authorization=;Max-age=0']);
+        res.setHeader('Authorization', ['Bearer ']);
         res.sendStatus(200);
     }
 }
