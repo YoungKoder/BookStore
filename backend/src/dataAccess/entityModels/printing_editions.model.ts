@@ -33,7 +33,7 @@ const printingEdition: Schema = new Schema({
     author_ids:[{
         type:mongoose.Schema.Types.ObjectId, 
         ref: 'Author', 
-        required:true
+        required:false
     }]
 });
 
