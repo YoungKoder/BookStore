@@ -6,6 +6,7 @@ import { User } from '../../shared/interfaces/entityInnerfaces/user.interface';
 import {UserWithThisEmailAlreadyExist} from "../../shared/exeptions/UserExist.exeption";
 import { WrongCredentialsException } from '../../shared/exeptions/WrongCredentials.exeption';
 import { createToken } from '../../shared/services/token.service';
+import { logger } from '../../shared/services/logger.service';
 
 export class AuthController implements Controller{
     public path = '/auth';
@@ -32,6 +33,7 @@ export class AuthController implements Controller{
         }
         let tokenData = await createToken(userEntity);
         res.setHeader('Authorization',[`Bearer ${tokenData.token}`]);
+        logger.debug('Calling res.send');
         res.send({user:userEntity});
     }
 

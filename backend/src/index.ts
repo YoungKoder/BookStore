@@ -1,5 +1,7 @@
 import dotenv from "dotenv";
 import App from './app';
+import pino from "pino";
+import expressPino from "express-pino-logger";
 
 //import routes
 // import routes from "./shared/routes/routes";
@@ -14,13 +16,13 @@ addConnection();
 dotenv.config();
 const port = process.env.SERVER_PORT;
 
+
 // app.use(routes);
 
 const app = new App([
     new AuthController(),
     new PrintingEditionsController()
 ])
-
 app.listen();
 
 
