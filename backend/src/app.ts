@@ -2,8 +2,7 @@ import express from "express";
 import cookieParser from 'cookie-parser';
 import bodyParser from "body-parser";
 import { Controller } from "./shared/interfaces/controller.interface";
-import {errorMiddleware, errorMiddlewareUserExist, errorMiddlewareWrongCredential} from "./shared/middleware/error.middleware";
-
+import {errorMiddleware} from "./shared/middleware/error.middleware";
 
 export default class App{
     public app:express.Application;

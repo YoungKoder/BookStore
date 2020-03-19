@@ -11,7 +11,6 @@ export const authMiddleware = async(req:Request,res:Response, next:NextFunction)
         const secret = process.env.JWT_SECRET;
         try{
             const verificationResponse = jwt.verify(token,secret) as DataStoredInToken;
-
             const id = verificationResponse.userId;
             const userEntity = await userModel.findById(id);
             if(userEntity){

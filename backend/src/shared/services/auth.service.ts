@@ -3,6 +3,7 @@ import { User } from "../interfaces/entityInnerfaces/user.interface";
 import bcrypt from "bcrypt";
 import { TokenData } from "../interfaces/token.interface";
 import { createToken } from "./token.service";
+import { createUser } from "../repositories/auth.repositoriy";
 
 export const addUser = async(user:User):Promise<User>=>{
     const userData = user;
@@ -12,7 +13,7 @@ export const addUser = async(user:User):Promise<User>=>{
     const passwordInText = userData.password_hash;
     const hashedPassword = await bcrypt.hash(passwordInText,10);
     user.password_hash = hashedPassword;
-    let userEntity = await userModel.create(user);
+    let userEntity = await createUser(user);
     return userEntity;
 }
 export const logInUser = async (user:User): Promise<User> =>{
@@ -24,7 +25,4 @@ export const logInUser = async (user:User): Promise<User> =>{
         }
     }
     return ;
-}
-export const createCookie = (tokenData:TokenData)=>{
-    return `Authorization=${tokenData.token}; HttpOnly; Max-Age=${tokenData.expiresIn}`;
 }

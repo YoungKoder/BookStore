@@ -1,7 +1,7 @@
 import * as express from 'express';
 import { Controller } from '../../shared/interfaces/controller.interface';
 import userModel from "../../dataAccess/entityModels/user.model";
-import {addUser, logInUser,createCookie } from "../../shared/services/auth.service";
+import {addUser, logInUser} from "../../shared/services/auth.service";
 import { User } from '../../shared/interfaces/entityInnerfaces/user.interface';
 import {UserWithThisEmailAlreadyExist} from "../../shared/exeptions/UserExist.exeption";
 import { WrongCredentialsException } from '../../shared/exeptions/WrongCredentials.exeption';
