@@ -19,6 +19,7 @@ export class AuthController implements Controller{
 
     private initializeRoutes(){
         this.router.post(`${this.path}/register`, this.registration);
+        this.router.get(`${this.path}/register/confirmPage`, this.confirmationPage);
         this.router.post(`${this.path}/loginIn`, this.loginIn);
         this.router.post(`${this.path}/logout`, this.loggingOut);
     }
@@ -52,5 +53,8 @@ export class AuthController implements Controller{
     private loggingOut = (req:express.Request, res:express.Response)=>{
         res.setHeader('Authorization', ['Bearer ']);
         res.sendStatus(200);
+    }
+    private confirmationPage = (req:express.Request, res:express.Response)=>{
+
     }
 }
