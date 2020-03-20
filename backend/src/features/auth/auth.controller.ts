@@ -6,7 +6,7 @@ import { User } from '../../shared/interfaces/entityInnerfaces/user.interface';
 import {UserWithThisEmailAlreadyExist} from "../../shared/exeptions/UserExist.exeption";
 import { WrongCredentialsException } from '../../shared/exeptions/WrongCredentials.exeption';
 import { createToken } from '../../shared/services/token.service';
-import { logger } from '../../shared/services/logger.service';
+import { logger } from '../../utils/logger.utils';
 
 export class AuthController implements Controller{
     public path = '/auth';

@@ -5,7 +5,7 @@ import { Controller } from "./shared/interfaces/controller.interface";
 import {errorMiddleware} from "./shared/middleware/error.middleware";
 import pino from "pino";
 import expressPino from "express-pino-logger";
-import { expressLogger } from "./shared/services/logger.service";
+import { expressLogger } from "./utils/logger.utils";
 
 export default class App{
     public app:express.Application;
