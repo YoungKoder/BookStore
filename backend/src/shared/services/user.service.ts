@@ -1,7 +1,6 @@
 import { User } from "../interfaces/entityInnerfaces/user.interface";
 import { findUserAndUpdate, findUserById } from "../repositories/user.repository";
 import bcrypt from "bcrypt";
-import { runInNewContext } from "vm";
 
 export const editPassword = async(oldPassword:string, newPassword:string, user:User):Promise<User>=>{
     const id = user.id;

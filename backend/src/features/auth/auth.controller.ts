@@ -7,11 +7,13 @@ import {UserWithThisEmailAlreadyExist} from "../../shared/exeptions/UserExist.ex
 import { WrongCredentialsException } from '../../shared/exeptions/WrongCredentials.exeption';
 import { createToken } from '../../shared/services/token.service';
 import { logger } from '../../utils/logger.utils';
+import { requestWithUser } from '../../shared/interfaces/requestWithUser.interface';
+import { sendMail } from '../../utils/nodemailer.utils';
 
 export class AuthController implements Controller{
     public path = '/auth';
     public router = express.Router();
-    private user = userModel;
+    private user:User;
 
     constructor(){
         this.initializeRoutes();
@@ -19,19 +21,25 @@ export class AuthController implements Controller{
 
     private initializeRoutes(){
         this.router.post(`${this.path}/register`, this.registration);
-        this.router.get(`${this.path}/register/confirmEmail`, this.confirmEmail);
+        this.router.get(`${this.path}/register`, this.sendConfirmMessage);
+        this.router.get(`${this.path}/register/confirmEmail`, this.confirmRegistration);
         this.router.post(`${this.path}/loginIn`, this.loginIn);
         this.router.post(`${this.path}/logout`, this.loggingOut);
     }
 
     private registration = async(req:express.Request,res:express.Response, next:express.NextFunction)=>{
         const userData:User = req.body;
+        console.log(`<<< userData from request: ${userData}`);
+        this.user = userData;
         let userEntity = await addUser(userData);
-        console.log(userEntity);
         if(!userEntity){
             next(new UserWithThisEmailAlreadyExist());
             return;
         }
+        // console.log(`<<< userData from request: ${userData}`);
+        sendMail(userData);
+
+        res.redirect(`${this.path}/register`);
         res.send({user:userEntity});
     }
 
@@ -51,7 +59,11 @@ export class AuthController implements Controller{
         res.setHeader('Authorization', ['Bearer ']);
         res.sendStatus(200);
     }
-    private confirmEmail = (req:express.Request, res:express.Response)=>{
-        
+    private sendConfirmMessage = (req:express.Request, res:express.Response)=>{
+        res.send(`SignUp was successfull, email with confirmation was send to ${this.user.email}`);
     }
+    private confirmRegistration = (req:express.Request, res:express.Response)=>{
+        res.send("You successfully confirm registartion");
+    }
+
 }

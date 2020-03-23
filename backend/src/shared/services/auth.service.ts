@@ -10,12 +10,10 @@ export const addUser = async(user:User):Promise<User>=>{
     const userData = user;
     if(await userModel.findOne({email:userData.email}))
         return ;
-
+    console.log(userData)
     const passwordInText = userData.password_hash;
     const hashedPassword = await bcrypt.hash(passwordInText,10);
     user.password_hash = hashedPassword;
-
-    sendMail(user);
     
     let userEntity = await createUser(user);
     return userEntity;
