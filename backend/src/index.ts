@@ -9,6 +9,7 @@ import expressPino from "express-pino-logger";
 import { addConnection } from "./dataAccess/database/databaseConect";
 import { AuthController } from "./features/auth/auth.controller";
 import { PrintingEditionsController } from "./features/printing-editions/printing-edition.controller";
+import { UserController } from "./features/user/user.controller";
 
 
 addConnection();
@@ -21,7 +22,8 @@ const port = process.env.SERVER_PORT;
 
 const app = new App([
     new AuthController(),
-    new PrintingEditionsController()
+    new PrintingEditionsController(),
+    new UserController()
 ])
 app.listen();
 

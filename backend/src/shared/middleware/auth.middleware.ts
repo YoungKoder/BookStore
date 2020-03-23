@@ -2,17 +2,15 @@ import { NextFunction, Response, Request } from 'express';
 import jwt from "jsonwebtoken";
 import { DataStoredInToken } from '../interfaces/token.interface';
 import userModel from '../../dataAccess/entityModels/user.model';
+import { getTokenFromHeader } from '../../utils/getTokenFromHeader.utils';
+import { getUserFromToken } from '../../utils/getUserFromToken.utils';
 
 export const authMiddleware = async(req:Request,res:Response, next:NextFunction)=>{
     const header = req.headers['authorization'];
     if(header){
-        const bearer = header.split(" ");
-        const token = bearer[1];
-        const secret = process.env.JWT_SECRET;
+        const token = await getTokenFromHeader(header);
         try{
-            const verificationResponse = jwt.verify(token,secret) as DataStoredInToken;
-            const id = verificationResponse.userId;
-            const userEntity = await userModel.findById(id);
+            const userEntity = await getUserFromToken(token);
             if(userEntity){
                 next();
             }else{

@@ -19,7 +19,7 @@ export class AuthController implements Controller{
 
     private initializeRoutes(){
         this.router.post(`${this.path}/register`, this.registration);
-        this.router.get(`${this.path}/register/confirmPage`, this.confirmationPage);
+        this.router.get(`${this.path}/register/confirmEmail`, this.confirmEmail);
         this.router.post(`${this.path}/loginIn`, this.loginIn);
         this.router.post(`${this.path}/logout`, this.loggingOut);
     }
@@ -32,9 +32,6 @@ export class AuthController implements Controller{
             next(new UserWithThisEmailAlreadyExist());
             return;
         }
-        let tokenData = await createToken(userEntity);
-        res.setHeader('Authorization',[`Bearer ${tokenData.token}`]);
-        logger.debug('Calling res.send');
         res.send({user:userEntity});
     }
 
@@ -54,7 +51,7 @@ export class AuthController implements Controller{
         res.setHeader('Authorization', ['Bearer ']);
         res.sendStatus(200);
     }
-    private confirmationPage = (req:express.Request, res:express.Response)=>{
-
+    private confirmEmail = (req:express.Request, res:express.Response)=>{
+        
     }
 }
