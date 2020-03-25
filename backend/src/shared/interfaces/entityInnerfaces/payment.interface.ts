@@ -1,3 +1,4 @@
-export interface Payment {
+import {Document} from 'mongoose';
+export interface Payment extends Document {
     transactionId: string
 }
