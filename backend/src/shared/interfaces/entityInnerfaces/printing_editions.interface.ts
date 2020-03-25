@@ -11,5 +11,5 @@ export interface PrintingEdition extends Document{
     type: PrintingEditionType,
     price: number,
     currency: Currency,
-    author_ids?: mongoose.Schema.Types.ObjectId
+    author_ids?: any
 }

@@ -1,9 +1,13 @@
 import { PrintingEdition } from "../interfaces/entityInnerfaces/printing_editions.interface";
 import printingEditionModel from "../../dataAccess/entityModels/printing_editions.model";
+import { findAuthorById } from "../repositories/author.repository";
+import { Author } from "../interfaces/entityInnerfaces/authors.interface";
 
-export const addNewPrintingEdition = async (edition:PrintingEdition):Promise<PrintingEdition>=>{
-    const editionData = edition;
-    let editionEntity = await printingEditionModel.create(editionData);
+export const addNewPrintingEdition = async (edition:PrintingEdition, authorId:string):Promise<PrintingEdition>=>{
+    let editionEntity = await printingEditionModel.create(edition);
+    editionEntity.author_ids = [...editionEntity.author_ids, authorId];
+    editionEntity.save();
+
     return editionEntity;
 } 
 export const deletePrintingEdition = async(id:string):Promise<PrintingEdition>=>{
@@ -20,3 +24,15 @@ export const modifyPrintingEdition = async(id:string, printingEditionNewData:Pri
     const printingEditionEntity = await printingEditionModel.findByIdAndUpdate(id,printingEditionNewData,{new:true} );
     return printingEditionEntity;
 }
+export const addPrintingEditionToAuthor = async(authorId:string,editionEntityId:string):Promise<Author>=>{
+    
+    try{
+        const authorEntity = await findAuthorById(authorId);
+        authorEntity.product_ids = [...authorEntity.product_ids,editionEntityId];
+        await authorEntity.save()
+        return authorEntity;
+    }
+    catch{
+        return;
+    }
+}   

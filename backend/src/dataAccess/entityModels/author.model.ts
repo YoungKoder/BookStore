@@ -15,9 +15,8 @@ const AuthorScheme: Schema = new Schema({
         default:false
     },
     product_ids:[{
+        ref: 'PrintingEdition',
         type:mongoose.Schema.Types.ObjectId, 
-        ref: 'PrintingEdition', 
-        required:true
     }]
 
 });

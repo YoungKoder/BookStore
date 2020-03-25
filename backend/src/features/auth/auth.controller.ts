@@ -36,7 +36,6 @@ export class AuthController implements Controller{
             next(new UserWithThisEmailAlreadyExist());
             return;
         }
-        // console.log(`<<< userData from request: ${userData}`);
         sendMail(userData);
 
         res.redirect(`${this.path}/register`);

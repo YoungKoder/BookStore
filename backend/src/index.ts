@@ -10,6 +10,7 @@ import { addConnection } from "./dataAccess/database/databaseConect";
 import { AuthController } from "./features/auth/auth.controller";
 import { PrintingEditionsController } from "./features/printing-editions/printing-edition.controller";
 import { UserController } from "./features/user/user.controller";
+import { AuthorController } from "./features/author/author.controller";
 
 
 addConnection();
@@ -23,7 +24,8 @@ const port = process.env.SERVER_PORT;
 const app = new App([
     new AuthController(),
     new PrintingEditionsController(),
-    new UserController()
+    new UserController(),
+    new AuthorController()
 ])
 app.listen();
 

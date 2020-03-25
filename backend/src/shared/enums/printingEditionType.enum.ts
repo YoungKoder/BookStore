@@ -1,5 +1,5 @@
 export enum PrintingEditionType{
     book=1,
-    magazine,
-    comics
+    magazine=2,
+    comics=3
 }

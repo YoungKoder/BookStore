@@ -5,5 +5,5 @@ export interface Author extends Document{
     name:string,
     createdDate?:Date,
     removed_at?:Boolean,
-    product_ids:mongoose.Schema.Types.ObjectId
+    product_ids:any
 }
