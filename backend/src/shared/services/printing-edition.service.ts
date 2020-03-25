@@ -4,6 +4,10 @@ import { findAuthorById } from "../repositories/author.repository";
 import { Author } from "../interfaces/entityInnerfaces/authors.interface";
 
 export const addNewPrintingEdition = async (edition:PrintingEdition, authorId:string):Promise<PrintingEdition>=>{
+    if(await printingEditionModel.findOne({title: edition.title})){
+        return;
+    }
+
     let editionEntity = await printingEditionModel.create(edition);
     editionEntity.author_ids = [...editionEntity.author_ids, authorId];
     editionEntity.save();

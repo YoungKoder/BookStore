@@ -42,6 +42,9 @@ export class PrintingEditionsController implements Controller{
         const editionData ={...req.body}
 
         const editionEntity = await addNewPrintingEdition(editionData,author);
+        if(!editionEntity){
+            next(new HttpExeption(500,"printing edition with this title already exist"));
+        }
         const authorEntity = await addPrintingEditionToAuthor(author, editionEntity.id);
         if(!authorEntity){
             next(new HttpExeption(500, "author doesn't exist"));
