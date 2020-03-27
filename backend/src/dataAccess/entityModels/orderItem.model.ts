@@ -11,11 +11,11 @@ const orderItemSchema: Schema = new Schema({
         type:Currency,
         default:1
     },
-    printingEdition:[{
+    printingEdition:{
         type:mongoose.Schema.Types.ObjectId,
         ref:'PrintingEdition',
         required:true
-    }],
+    },
     count:{
         type:Number,
         required:true

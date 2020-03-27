@@ -9,5 +9,6 @@ export interface Order extends Document{
     description: string,
     date: Date,
     orderItems: Array<OrderItem>,
-    payment: Payment
+    payment: Payment,
+    removed_at:Boolean
 }

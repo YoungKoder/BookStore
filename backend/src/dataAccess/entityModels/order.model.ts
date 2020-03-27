@@ -5,8 +5,8 @@ import userModel from './user.model';
 
 const OrderScheme:Schema = new Schema({
     user:{
-        required:true,
-        type: userModel
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
     },
     description:{
         type:String
@@ -15,12 +15,18 @@ const OrderScheme:Schema = new Schema({
         type:Date,
         default:Date.now
     },
-    orderItems:{
-        type:Array,
+    orderItems:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'orderItem',
         reguired:true
-    },
+    }],
     payment:{
-        type:String
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'Payment'
+    },
+    removed_at:{
+        type:Boolean,
+        default:false
     }
 })
 
