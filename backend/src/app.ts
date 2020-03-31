@@ -3,9 +3,8 @@ import cookieParser from 'cookie-parser';
 import bodyParser from "body-parser";
 import { Controller } from "./shared/interfaces/controller.interface";
 import {errorMiddleware} from "./shared/middleware/error.middleware";
-import pino from "pino";
-import expressPino from "express-pino-logger";
 import { expressLogger } from "./utils/logger.utils";
+import cors from "cors";
 
 export default class App{
     public app:express.Application;
@@ -25,6 +24,7 @@ export default class App{
         this.app.use(bodyParser.json());
         this.app.use(cookieParser());
         this.app.use(expressLogger);
+        this.app.use(cors());
     }
 
     private initializeErrorHandling(){
