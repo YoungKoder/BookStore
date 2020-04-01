@@ -6,3 +6,10 @@ export interface SignUpUserData{
     password:string,
     confirmPassword:string
 }
+export interface SignInUserData{
+    email:string,
+    password:string
+}
+export interface InitialValues{
+
+}

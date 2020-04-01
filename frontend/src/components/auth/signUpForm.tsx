@@ -7,7 +7,7 @@ import {
   } from 'formik';
 
 import * as yup from "yup";
-import { SignUpUserData } from "../../types/SignUpUserData";
+import { SignUpUserData, InitialValues } from "../../types/SignUpUserData";
 import ApiServiceBookStore from "../../services/api-service";
 
 const serviceApi = new ApiServiceBookStore();
@@ -37,9 +37,6 @@ const SignUpInnerForm = (props:FormikProps<SignUpUserData>)=>{
     )
 }
 
-interface InitialValues{
-
-}
 export const SignUpForm = withFormik<InitialValues,SignUpUserData >({
     mapPropsToValues: (props)=>{
         return{
