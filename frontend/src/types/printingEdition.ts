@@ -1,4 +1,4 @@
-export interface printingEditionContext{
+export interface PrintingEdition{
     title:string,
     description: string,
     cover_image?: string,

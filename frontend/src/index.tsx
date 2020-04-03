@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './components/app/App';
 import { BookStoreServiceProviderBooks } from './bookStore-service-context/bookStore-service-context';
 import ApiServiceBookStore from './services/api-service';
-import { printingEditionContext } from './types/contexts/printingEditionContext';
+import { PrintingEdition } from './types/printingEdition';
 
 const {printingEditions} = new ApiServiceBookStore();
 

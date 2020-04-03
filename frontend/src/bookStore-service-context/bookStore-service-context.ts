@@ -1,7 +1,7 @@
 import React from "react";
-import { printingEditionContext } from "../types/contexts/printingEditionContext";
+import { PrintingEdition } from "../types/printingEdition";
 
-const contextPrintingEdition = React.createContext<printingEditionContext[]| null>(null);
+const contextPrintingEdition = React.createContext<PrintingEdition[]| null>(null);
 export const BookStoreServiceProviderBooks = contextPrintingEdition.Provider;
 
 export const BookStoreServiceConsumerBooks = contextPrintingEdition.Consumer;

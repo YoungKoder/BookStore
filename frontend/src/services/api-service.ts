@@ -1,10 +1,9 @@
 import axios from "axios";
 import { SignUpUserData, SignInUserData } from "../types/SignUpUserData";
-import {PrintingEdition} from "../../../backend/src/shared/interfaces/entityInnerfaces/printing_editions.interface";
-import { printingEditionContext } from "../types/contexts/printingEditionContext";
+import { PrintingEdition } from "../types/printingEdition";
 
 export default class ApiServiceBookStore {
-    public printingEditions:printingEditionContext[] = [];
+    public printingEditions:PrintingEdition[] = [];
     
     registerUser = async(userData:SignUpUserData)=>{
         const {password, confirmPassword, ...other} = userData;
@@ -29,7 +28,7 @@ export default class ApiServiceBookStore {
 
     getPrintingEditions = async() => {
         const res = await axios.get(`http://localhost:8082/printing-editions`)
-        const data:printingEditionContext = res.data;
+        const data:PrintingEdition = res.data;
         this.printingEditions =[
             ...this.printingEditions,
             data
