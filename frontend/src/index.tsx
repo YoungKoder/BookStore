@@ -5,11 +5,15 @@ import { BookStoreServiceProviderBooks } from './bookStore-service-context/bookS
 import ApiServiceBookStore from './services/api-service';
 import { PrintingEdition } from './types/printingEdition';
 
-const {printingEditions} = new ApiServiceBookStore();
+const {getPrintingEditions} = new ApiServiceBookStore();
 
 ReactDOM.render(
   <React.StrictMode>
-    <BookStoreServiceProviderBooks value={printingEditions}>
+    <BookStoreServiceProviderBooks value={{
+      actions:{
+        getBooks:getPrintingEditions()
+      }
+    }}>
       <App />
     </BookStoreServiceProviderBooks>
   </React.StrictMode>,

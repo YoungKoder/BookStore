@@ -26,12 +26,13 @@ export default class ApiServiceBookStore {
         console.log(res.data);
     }
 
-    getPrintingEditions = async() => {
+    getPrintingEditions = async():Promise<PrintingEdition> => {
         const res = await axios.get(`http://localhost:8082/printing-editions`)
         const data:PrintingEdition = res.data;
         this.printingEditions =[
             ...this.printingEditions,
             data
         ]
+        return res.data;
     }
 }
