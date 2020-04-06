@@ -6,5 +6,6 @@ export interface PrintingEdition{
     type: 1 | 2 |3 ,
     price: number,
     currency: 1|2|3,
-    author_ids?: any
+    author_ids?: any,
+    _id?: any
 }
