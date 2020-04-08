@@ -1,9 +1,13 @@
 import { printingEditionConstants } from "./constants/printindEditions.constants";
 import { PrintingEdition } from "../printingEdition";
 
-interface PrintingEditionsLoadedAction{
-    type: typeof printingEditionConstants.PRS_LOADED,
-    payload: PrintingEdition[]
+export interface PrintingEditionsLoadedAction{
+    type: "PRS_LOADED",
+    printingEditions: PrintingEdition[]
+}
+export interface PrintingEditionsFetchingAction{
+    type: "PRS_FETCHING",
+    isFetching: boolean
 }
 
-export type PrintingEditionsActionTypes = PrintingEditionsLoadedAction;
+export type PrintingEditionsActionTypes = PrintingEditionsLoadedAction | PrintingEditionsFetchingAction;

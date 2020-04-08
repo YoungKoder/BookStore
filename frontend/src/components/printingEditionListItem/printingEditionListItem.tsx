@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { PrintingEdition } from "../../types/printingEdition";
+import store from "../../store";
 
 
 export const PrintingEditionListItem = ({printingEdition}:any)=>{
-
-    const{title,description,author_ids} = printingEdition;
+    const {title,description,author_ids} = printingEdition
     return(
         <div>
             <p>Title - {title}</p>

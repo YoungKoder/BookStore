@@ -2,17 +2,25 @@ import { printingEditionConstants } from "../types/actionTypes/constants/printin
 import { PrintingEditionsActionTypes } from "../types/actionTypes/actionCreators.types";
 import { PrintingEditionsState } from "../types/stateTypes/printingEditionStateTypes";
 
-const initialState:PrintingEditionsState = {
-    printingEditions:[]
+const editions:PrintingEditionsState = {
+    printingEditions:[],
+    isFetching:false
 }
 
-export const printingEditionsReducer = (state = initialState, action:PrintingEditionsActionTypes):PrintingEditionsState => {
+const reduce = (state:PrintingEditionsState = editions, action:PrintingEditionsActionTypes):PrintingEditionsState => {
     switch (action.type){
-        case printingEditionConstants.PRS_LOADED:
+        case'PRS_LOADED':
             return{
-                printingEditions:action.payload
+                ...state,printingEditions:action.printingEditions,
+            }
+        case 'PRS_FETCHING':
+            return{
+                ...state,
+                isFetching:action.isFetching
             }
         default:
             return state;
     }
 }
+
+export default reduce;

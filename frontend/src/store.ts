@@ -1,6 +1,15 @@
-import {createStore} from "redux";
-import { printingEditionsReducer } from "./reducers/printingEditionsReducer";
+import { createStore, combineReducers, applyMiddleware } from 'redux'
+import printingEdition from "./reducers/printingEditionsReducer";
+import thunk from 'redux-thunk';
+import { PrintingEditionsState } from './types/stateTypes/printingEditionStateTypes';
 
-const store = createStore(printingEditionsReducer);
+
+export interface RootState{
+    printingEdition: PrintingEditionsState 
+}
+
+const store =  createStore(combineReducers<RootState>({
+    printingEdition:printingEdition
+}), applyMiddleware(thunk))
 
 export default store;
