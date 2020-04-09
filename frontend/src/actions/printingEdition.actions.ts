@@ -41,9 +41,11 @@ export const printingEditionsError = (error:boolean):PrintingEditionsErrorAction
 export const uploadBooks = ():ThunkAction<Promise<void>,{},{},AnyAction> => {
     return async(dispatch:ThunkDispatch<{}, {}, AnyAction>):Promise<void> => { 
         dispatch(printingEditionsFetching(true))
+        dispatch(printingEditionsError(false))
         console.log("Fetching books started");
         try{
             const editions = await printingEditionsService.getEditions();
+            
             dispatch(printingEditionsLoaded(editions));
             dispatch(printingEditionsFetching(false));
             console.log("Fetching books finished");
