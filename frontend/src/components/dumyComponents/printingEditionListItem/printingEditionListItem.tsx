@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import { PrintingEdition } from "../../types/printingEdition";
-import store from "../../store";
+import { PrintingEdition } from "../../../types/printingEdition";
+import store from "../../../store";
 
 
 export const PrintingEditionListItem = ({printingEdition}:any)=>{

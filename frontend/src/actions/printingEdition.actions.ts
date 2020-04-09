@@ -1,6 +1,9 @@
 import { printingEditionConstants } from "../types/actionTypes/constants/printindEditions.constants"
 import { PrintingEdition } from "../types/printingEdition"
-import { PrintingEditionsActionTypes, PrintingEditionsLoadedAction, PrintingEditionsFetchingAction} from "../types/actionTypes/actionCreators.types"
+import { 
+    PrintingEditionsLoadedAction, 
+    PrintingEditionsFetchingAction, 
+    PrintingEditionsErrorAction } from "../types/actionTypes/actionCreators.types"
 import {ThunkAction, ThunkDispatch} from "redux-thunk";
 import {AnyAction} from "redux";
 import {printingEditionsService} from "../services/printingEditionsService";
@@ -18,6 +21,23 @@ export const printingEditionsFetching = (isFetching:boolean):PrintingEditionsFet
     }
 }
 
+export const printingEditionsError = (error:boolean):PrintingEditionsErrorAction => {
+    
+    if(error){
+        return {
+            type: "PRS_ERROR",
+            error:"Cant fetch printing Editions"
+        }
+    }else{
+        return{
+            type: "PRS_ERROR",
+            error:""
+        }
+    }
+    
+    
+}
+
 export const uploadBooks = ():ThunkAction<Promise<void>,{},{},AnyAction> => {
     return async(dispatch:ThunkDispatch<{}, {}, AnyAction>):Promise<void> => { 
         dispatch(printingEditionsFetching(true))
@@ -28,8 +48,8 @@ export const uploadBooks = ():ThunkAction<Promise<void>,{},{},AnyAction> => {
             dispatch(printingEditionsFetching(false));
             console.log("Fetching books finished");
         }catch{
-            console.log("smth went wrong");
-            throw new Error("Can't fetch data");
+            dispatch(printingEditionsError(true))
+            dispatch(printingEditionsFetching(false));
         }
     }
 }

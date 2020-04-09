@@ -3,11 +3,12 @@ import { PrintingEditionsState } from "../../types/stateTypes/printingEditionSta
 import { useSelector, useDispatch } from "react-redux";
 import { PrintingEdition } from "../../types/printingEdition";
 import { uploadBooks } from "../../actions/printingEdition.actions";
-import { PrintingEditionListItem } from "../printingEditionListItem/printingEditionListItem";
+import { PrintingEditionListItem } from "../dumyComponents/printingEditionListItem/printingEditionListItem";
 import { RootState } from "../../store";
 import { ThunkDispatch } from 'redux-thunk'
 import { connect } from 'react-redux'
-import { Spinner } from "../../spinner/spinner";
+import { Spinner } from "../dumyComponents/spinner/spinner";
+import { ErrorIndicator } from "../dumyComponents/eror-indicator/error-indicator";
 
 interface OwnProps{
 
@@ -32,6 +33,7 @@ const PrintingEditionList:React.SFC<Props> = (props:Props, ownProps:OwnProps)=> 
     return(
         <>
             {props.printingEditions.isFetching && <Spinner/>}
+            {props.printingEditions.error && <ErrorIndicator/>}
             {!props.printingEditions.isFetching && <ul>             
                 {
                     props.printingEditions.printingEditions.map(edition =>{
@@ -51,7 +53,8 @@ const mapStateToProps = (states: RootState) => {
     return {
         printingEditions: {
             printingEditions:states.printingEdition.printingEditions,
-            isFetching:states.printingEdition.isFetching
+            isFetching:states.printingEdition.isFetching,
+            error:states.printingEdition.error
         }
     }
 }

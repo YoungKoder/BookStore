@@ -1,5 +1,5 @@
 import React from "react";
-import { ErrorIndicator } from "../eror-indicator/error-indicator";
+import { ErrorIndicator } from "../components/dumyComponents/eror-indicator/error-indicator";
 
 export default class ErrorBoundary extends React.Component{
     state = {

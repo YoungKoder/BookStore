@@ -9,5 +9,8 @@ export interface PrintingEditionsFetchingAction{
     type: "PRS_FETCHING",
     isFetching: boolean
 }
-
-export type PrintingEditionsActionTypes = PrintingEditionsLoadedAction | PrintingEditionsFetchingAction;
+export interface PrintingEditionsErrorAction{
+    type: "PRS_ERROR",
+    error:string
+}
+export type PrintingEditionsActionTypes = PrintingEditionsLoadedAction | PrintingEditionsFetchingAction |PrintingEditionsErrorAction;
