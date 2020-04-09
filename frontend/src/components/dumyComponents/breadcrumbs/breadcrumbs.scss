@@ -1,0 +1,33 @@
+@import "../../../assets/variables.scss";
+
+.breadcrumb{
+    color:#fff;
+    font-family: $headers;
+    margin:0;
+    & span:first-child{
+        opacity:.7;
+    }
+    &-link{
+        margin-bottom: 0;
+        line-height: 2.5;
+        display: inline-block;
+        opacity:1;
+        &::before{
+            display: inline-block;
+            padding-right: 5px;
+            padding-left: 5px;
+            content: "/"; 
+        }
+    }
+    & .active{
+        
+        color:#fff;
+    }   
+}
+
+// .breadcrumb-link.active {
+//     a{
+        
+//     }
+    
+// }

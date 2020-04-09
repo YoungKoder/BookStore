@@ -1,0 +1,11 @@
+@import "../../../assets/variables.scss";
+
+.search{
+    background: rgba(244, 244, 244, 0.78);
+    border:none;
+    padding:.5rem .7rem;
+    &::placeholder{
+        line-height:17px;
+        font-size: 14px;
+    }
+}
