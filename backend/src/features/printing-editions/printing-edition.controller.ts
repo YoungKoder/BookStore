@@ -1,7 +1,7 @@
 import * as express from 'express';
 import { Controller } from '../../shared/interfaces/controller.interface';
 import printingEditionModel from '../../dataAccess/entityModels/printing_editions.model';
-import { addNewPrintingEdition, findPrintingEditionByID, deletePrintingEdition, modifyPrintingEdition, addPrintingEditionToAuthor } from '../../shared/services/printing-edition.service';
+import { addNewPrintingEdition, findPrintingEditionByID, deletePrintingEdition, modifyPrintingEdition, addPrintingEditionToAuthor, getAllPrintingEditions } from '../../shared/services/printing-edition.service';
 import {authMiddleware} from "../../shared/middleware/auth.middleware";
 import { checkRoleMiddleware } from '../../shared/middleware/checkRole.middleware';
 import { HttpExeption } from '../../shared/exeptions/HttpExeption';
@@ -27,7 +27,12 @@ export class PrintingEditionsController implements Controller{
     }
 
     private getAllPrintingEd = async(req:express.Request,res:express.Response,next:express.NextFunction)=>{
-        const printingEditions = await this.printingEdition.find();
+        const printingEditions = await getAllPrintingEditions();
+        // printingEditions.map(async (edition)=> await edition.populate('author_ids','name').execPopulate());
+        for(let i =0;i<printingEditions.length;i++){
+            await printingEditions[i].populate('author_ids','name').execPopulate();
+            
+        }
         res.send(printingEditions);
     }
 

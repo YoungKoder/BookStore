@@ -3,6 +3,10 @@ import printingEditionModel from "../../dataAccess/entityModels/printing_edition
 import { findAuthorById } from "../repositories/author.repository";
 import { Author } from "../interfaces/entityInnerfaces/authors.interface";
 
+export const getAllPrintingEditions = async ():Promise<PrintingEdition[]>=>{
+    const printingEditionsEntities = await printingEditionModel.find();
+    return printingEditionsEntities;
+}
 export const addNewPrintingEdition = async (edition:PrintingEdition, authorId:string):Promise<PrintingEdition>=>{
     if(await printingEditionModel.findOne({title: edition.title})){
         return;

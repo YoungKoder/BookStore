@@ -10,6 +10,7 @@ import { connect } from 'react-redux'
 import { Spinner } from "../dumyComponents/spinner/spinner";
 import { ErrorIndicator } from "../dumyComponents/eror-indicator/error-indicator";
 
+import "./printingEditionList.scss";
 interface OwnProps{
 
 }
@@ -32,17 +33,46 @@ const PrintingEditionList:React.SFC<Props> = (props:Props, ownProps:OwnProps)=> 
 
     return(
         <>
-            {props.printingEditions.isFetching && <Spinner/>}
-            {props.printingEditions.error && <ErrorIndicator/>}
-            {!props.printingEditions.isFetching && <ul>             
-                {
-                    props.printingEditions.printingEditions.map(edition =>{
-                        return(
-                            <li key={edition._id}><PrintingEditionListItem  printingEdition = {edition}/></li>
-                        ) 
-                    })
-                }
-            </ul>}
+        <div className="catalog container">
+            <div className="row">
+                <div className="catalog_header d-flex justify-content-between">
+                    <h2>CATALOG</h2>
+                    <div className="catalog_header__rightFilters d-flex justify-content-between col-3">
+                        <div className="currency d-flex align-items-center">
+                            <p>Currency</p>
+                            <div className="checkbox"></div>
+                        </div>
+                        <div className="sortingByPrice d-flex align-items-center">
+                            <p>Sort By</p>
+                            <div className="checkbox"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className="row">
+                <div className="catalog_content d-flex justify-content-between">
+                    <div className="filters col">
+                         
+                    </div>
+                    <div className="itemsCards col-9">
+                    {props.printingEditions.isFetching && <Spinner/>}
+                    {props.printingEditions.error && <ErrorIndicator/>}
+                    {!props.printingEditions.isFetching && <ul className=" d-flex justify-content-between">             
+                        {
+                            props.printingEditions.printingEditions.map((edition) =>{
+                                return(
+                                    <li key={edition._id}><PrintingEditionListItem  
+                                        {...edition}
+                                    /></li>
+                                ) 
+                            })
+                        }
+                    </ul>}
+                    </div>
+                </div>
+            </div>
+        </div>
+            
 
         </>
         

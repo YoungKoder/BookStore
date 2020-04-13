@@ -15,7 +15,7 @@ export const Header:React.FC<any> =(props:OwnProps)=>{
                 <div className="container">
                     <div className="row d-flex align-items-center justify-content-between">
                         <Route path="/" component={Breadcrumbs}/>
-                        <Search />
+                        <Search/>
                     </div>
                 </div>
             </div>
