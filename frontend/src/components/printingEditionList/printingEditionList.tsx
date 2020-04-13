@@ -57,7 +57,7 @@ const PrintingEditionList:React.SFC<Props> = (props:Props, ownProps:OwnProps)=> 
                     <div className="itemsCards col-9">
                     {props.printingEditions.isFetching && <Spinner/>}
                     {props.printingEditions.error && <ErrorIndicator/>}
-                    {!props.printingEditions.isFetching && <ul className=" d-flex justify-content-between">             
+                    {!props.printingEditions.isFetching && <ul className=" cardsList d-flex justify-content-between">             
                         {
                             props.printingEditions.printingEditions.map((edition) =>{
                                 return(

@@ -29,6 +29,10 @@
 .itemsCards{
     padding-right: 0;
 }
+.cardsList{
+    flex-wrap: wrap;
+    padding-left: 0px;
+}
 .checkbox{
     width: 50px;
     background:$gray;
