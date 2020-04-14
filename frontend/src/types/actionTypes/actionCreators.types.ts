@@ -13,4 +13,8 @@ export interface PrintingEditionsErrorAction{
     type: "PRS_ERROR",
     error:string
 }
-export type PrintingEditionsActionTypes = PrintingEditionsLoadedAction | PrintingEditionsFetchingAction |PrintingEditionsErrorAction;
+export interface PrintingEditionSearch{
+    type: "PRS_SEARCH",
+    searchedPrintingEditions:PrintingEdition[];
+}
+export type PrintingEditionsActionTypes = PrintingEditionsLoadedAction | PrintingEditionsFetchingAction |PrintingEditionsErrorAction | PrintingEditionSearch;

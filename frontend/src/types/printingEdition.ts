@@ -3,14 +3,26 @@ interface Author{
     name:string
 }
 
+enum EditionType {
+    book = 1,
+    magazine = 2,
+    comics = 3
+
+}
+export enum EditionCurrency{
+    USD ="USD",
+    RUB="RUB",
+    EUR="EUR"
+}
+
 export interface PrintingEdition{
     title:string,
     description: string,
     cover_image?: string,
     removed_at?: Boolean,
-    type: 1 | 2 |3 ,
+    type:  EditionType,
     price: number,
-    currency: 1|2|3,
+    currency: EditionCurrency,
     author_ids: Author[],
     _id?: any
 }

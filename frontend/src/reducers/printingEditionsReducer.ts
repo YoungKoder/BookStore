@@ -1,7 +1,5 @@
-import { printingEditionConstants } from "../types/actionTypes/constants/printindEditions.constants";
 import { PrintingEditionsActionTypes } from "../types/actionTypes/actionCreators.types";
 import { PrintingEditionsState } from "../types/stateTypes/printingEditionStateTypes";
-import { boolean } from "yup";
 
 const editions:PrintingEditionsState = {
     printingEditions:[],
@@ -24,6 +22,11 @@ const reduce = (state:PrintingEditionsState = editions, action:PrintingEditionsA
             return{
                 ...state,
                 error:action.error
+            }
+        case 'PRS_SEARCH':
+            return{
+                ...state,
+                printingEditions:action.searchedPrintingEditions
             }
         default:
             return state;

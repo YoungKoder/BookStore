@@ -1,12 +1,13 @@
-import { printingEditionConstants } from "../types/actionTypes/constants/printindEditions.constants"
 import { PrintingEdition } from "../types/printingEdition"
 import { 
     PrintingEditionsLoadedAction, 
     PrintingEditionsFetchingAction, 
-    PrintingEditionsErrorAction } from "../types/actionTypes/actionCreators.types"
+    PrintingEditionsErrorAction,
+    PrintingEditionSearch} from "../types/actionTypes/actionCreators.types"
 import {ThunkAction, ThunkDispatch} from "redux-thunk";
 import {AnyAction} from "redux";
 import {printingEditionsService} from "../services/printingEditionsService";
+import store from "../store";
 
 export const printingEditionsLoaded = (newBooks:PrintingEdition[]):PrintingEditionsLoadedAction =>{
     return{
@@ -34,24 +35,41 @@ export const printingEditionsError = (error:boolean):PrintingEditionsErrorAction
             error:""
         }
     }
-    
-    
+}
+export const printingEditionSearched = (searched:PrintingEdition[]):PrintingEditionSearch =>{
+    return{
+        type:"PRS_SEARCH",
+        searchedPrintingEditions:searched
+    }
 }
 
 export const uploadBooks = ():ThunkAction<Promise<void>,{},{},AnyAction> => {
     return async(dispatch:ThunkDispatch<{}, {}, AnyAction>):Promise<void> => { 
         dispatch(printingEditionsFetching(true))
         dispatch(printingEditionsError(false))
-        console.log("Fetching books started");
         try{
             const editions = await printingEditionsService.getEditions();
             
             dispatch(printingEditionsLoaded(editions));
             dispatch(printingEditionsFetching(false));
-            console.log("Fetching books finished");
         }catch{
             dispatch(printingEditionsError(true))
             dispatch(printingEditionsFetching(false));
         }
     }
+}
+
+export const searchEditions = (s:string):ThunkAction<Promise<void>,{},{},AnyAction> =>{
+    return async(dispatch:ThunkDispatch<{}, {}, AnyAction>):Promise<void>=>{
+        console.log("string into action", s);
+            const currentPrintingEditions = store.getState()
+            console.log("PrintingEditionsFromStore",currentPrintingEditions)
+            let searchedPrintingEditions:PrintingEdition[] = [];
+            searchedPrintingEditions = currentPrintingEditions.printingEdition.printingEditions.filter(edition => {
+                const editionTitle = edition.title.toLowerCase();
+                const filter = s.toLowerCase();
+                return editionTitle.includes(filter);
+            })
+            dispatch(printingEditionSearched(searchedPrintingEditions));
+    }   
 }

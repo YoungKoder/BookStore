@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Breadcrumbs from "../breadcrumbs/breadcrumbs";
 import "./header.scss";
-import {Route,withRouter} from "react-router-dom";
-import { Search } from "../search/search";
+import {Route} from "react-router-dom";
+import Search from "../../search/search";
 
 interface OwnProps{
 

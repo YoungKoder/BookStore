@@ -1,7 +1,5 @@
 import React, { useEffect } from "react";
 import { PrintingEditionsState } from "../../types/stateTypes/printingEditionStateTypes";
-import { useSelector, useDispatch } from "react-redux";
-import { PrintingEdition } from "../../types/printingEdition";
 import { uploadBooks } from "../../actions/printingEdition.actions";
 import { PrintingEditionListItem } from "../dumyComponents/printingEditionListItem/printingEditionListItem";
 import { RootState } from "../../store";
@@ -11,6 +9,9 @@ import { Spinner } from "../dumyComponents/spinner/spinner";
 import { ErrorIndicator } from "../dumyComponents/eror-indicator/error-indicator";
 
 import "./printingEditionList.scss";
+import { Drobdown} from "../dumyComponents/dropdown/drobdown";
+import { DrobdownMenuItem } from "../../types/drobdownMenuItems";
+
 interface OwnProps{
 
 }
@@ -26,11 +27,12 @@ interface StateProps{
 type Props = StateProps & DispatchProps & OwnProps
 
 
-const PrintingEditionList:React.SFC<Props> = (props:Props, ownProps:OwnProps)=> {
+const PrintingEditionList:React.SFC<Props> = (props:Props)=> {
     useEffect(()=>{
         props.uploadBooks()
     },[])
 
+    const drobdownMenuItems:DrobdownMenuItem[] = [{title:"USD"},{title:"EUR"},{title:"RUB"},{title:"UA"}];
     return(
         <>
         <div className="catalog container">
@@ -40,7 +42,9 @@ const PrintingEditionList:React.SFC<Props> = (props:Props, ownProps:OwnProps)=> 
                     <div className="catalog_header__rightFilters d-flex justify-content-between col-3">
                         <div className="currency d-flex align-items-center">
                             <p>Currency</p>
-                            <div className="checkbox"></div>
+                            <Drobdown defaultFilter="USD"
+                            drobdownsMenuItems={drobdownMenuItems}
+                            />
                         </div>
                         <div className="sortingByPrice d-flex align-items-center">
                             <p>Sort By</p>
@@ -88,11 +92,10 @@ const mapStateToProps = (states: RootState) => {
         }
     }
 }
-const mapDispatchToProps = (dispatch: ThunkDispatch<{}, {}, any>, ownProps: OwnProps):DispatchProps  => {
+const mapDispatchToProps = (dispatch: ThunkDispatch<{}, {}, any>):DispatchProps  => {
     return{
         uploadBooks: ()=>{
             dispatch(uploadBooks())
-            console.log("UploadFinished")
         }
     }
 }

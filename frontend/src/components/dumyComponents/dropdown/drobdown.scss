@@ -1,0 +1,46 @@
+@import "../../../assets/variables.scss";
+
+.drobdown{
+    font-family: $text;
+    font-size:14px;
+    position: relative;
+    z-index: 1;
+    &_title{
+        color:$gray;
+        background: rgba($color: #EFEFEF, $alpha: .51);
+        padding: .5rem 3rem .5rem .5rem;
+        &::before{
+            content:"";
+            position:absolute;
+            width: 12px;
+            height: 6px;
+            border-top:6px solid $gray ;
+            border-left: 6px solid rgba(0,0,0,0);
+            border-right: 6px solid rgba(0,0,0,0);
+            top:1rem;
+            right:1rem;
+        }
+        &:hover{
+            cursor: pointer;
+        }
+    }
+    &_menuItems{
+        position:absolute;
+        width: 100%;
+        font-size: 0px;
+        background: rgba(#fff, $alpha: .0);
+        color:rgba($gray, $alpha: .3);
+        li{
+            padding:.2rem 0rem .2rem .5rem;
+            &:hover{
+                color:$action;
+                cursor: pointer;
+            }
+        }
+        transition: .3s all ease-in-out;
+        &--active{
+            background: rgba(#CDCDCD, $alpha: .5);
+            font-size: 14px;
+        }
+    }
+}
