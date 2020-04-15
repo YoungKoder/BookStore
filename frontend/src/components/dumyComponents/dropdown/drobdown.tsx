@@ -2,22 +2,30 @@ import React, { useState, useEffect } from "react";
 
 import "./drobdown.scss";
 import { DrobdownMenuItem } from "../../../types/drobdownMenuItems";
-import { EditionCurrency } from "../../../types/enums";
+import { EditionCurrency, PriceFilter } from "../../../types/enums";
+
+interface Filter{
+    defaultCurrency:EditionCurrency
+    defaultWay:PriceFilter
+}
+// interface ActionFunction{
+//     changeCurrency?: (toCurrency:EditionCurrency)=>void
+//     changeSortingWay?: (sortingWay:PriceFilter)=>void
+// }
 
 interface OwnProps{
-    defaultFilterCurrency:EditionCurrency
+    defaultFilterSorting:EditionCurrency|PriceFilter
     drobdownsMenuItems:DrobdownMenuItem[]
-    actionFunction: (toCurrency:EditionCurrency)=>void
-    uplodBooks: ()=>void
+    actionFunction: (filterParametr:EditionCurrency|PriceFilter) => void
 }
 
 type Props = OwnProps;
 export const Drobdown:React.SFC<Props> = (OwnProps:OwnProps)=>{
 
-    const {defaultFilterCurrency,drobdownsMenuItems } = OwnProps;
+    const {defaultFilterSorting,drobdownsMenuItems } = OwnProps;
 
     const [currentFilter, setCurrentFilter] = useState({
-        currentFilter:defaultFilterCurrency
+        currentFilter:defaultFilterSorting
     })
 
     const [filterWasChanged, setFilterChange] = useState({changed:false});
@@ -26,7 +34,6 @@ export const Drobdown:React.SFC<Props> = (OwnProps:OwnProps)=>{
         visible:false
     })
 
-    
     const [className, setClassName] = useState({
         drobdownMenuItemsClass:"drobdown_menuItems"
     })

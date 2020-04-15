@@ -71,7 +71,8 @@ const mapStateToProps = (states: RootState) => {
             printingEditions:states.printingEdition.printingEditions,
             isFetching:states.printingEdition.isFetching,
             error:states.printingEdition.error,
-            currency:states.printingEdition.currency
+            currency:states.printingEdition.currency,
+            sortingByPrice:states.printingEdition.sortingByPrice
         }
     }
 }

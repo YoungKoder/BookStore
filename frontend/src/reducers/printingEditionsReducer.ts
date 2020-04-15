@@ -1,12 +1,13 @@
 import { PrintingEditionsActionTypes } from "../types/actionTypes/actionCreators.types";
 import { PrintingEditionsState } from "../types/stateTypes/printingEditionStateTypes";
-import { EditionCurrency } from "../types/enums";
+import { EditionCurrency, PriceFilter } from "../types/enums";
 
 const editions:PrintingEditionsState = {
     printingEditions:[],
     isFetching:false,
     error:"",
-    currency:EditionCurrency.USD
+    currency:EditionCurrency.USD,
+    sortingByPrice:PriceFilter.LowToHight
 }
 const reduce = (state:PrintingEditionsState = editions, action:PrintingEditionsActionTypes):PrintingEditionsState => {
     switch (action.type){
@@ -35,6 +36,12 @@ const reduce = (state:PrintingEditionsState = editions, action:PrintingEditionsA
                 ...state,
                 printingEditions:action.EditionsWithNewCurrency,
                 currency:action.newCurrency
+            }
+        case "PRS_SORT_BY_PRICE":
+            return{
+                ...state,
+                sortingByPrice:action.newSortingWay,
+                printingEditions:action.replacedEditions
             }
         default:
             return state;

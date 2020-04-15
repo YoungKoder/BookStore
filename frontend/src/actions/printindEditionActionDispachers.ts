@@ -1,11 +1,12 @@
-import { printingEditionsLoaded, printingEditionsFetching, printingEditionsError, printingEditionSearched, printingEditionsChangeCurrency } from "./printingEdition.actions";
+import { printingEditionsLoaded, printingEditionsFetching, printingEditionsError, printingEditionSearched, printingEditionsChangeCurrency, printingEditionsChangeSortingWay } from "./printingEdition.actions";
 import { ThunkAction, ThunkDispatch } from "redux-thunk";
 import { AnyAction } from "redux";
 import { printingEditionsService } from "../services/printingEditionsService";
 import store from "../store";
 import { PrintingEdition } from "../types/printingEdition";
-import { EditionCurrency } from "../types/enums";
+import { EditionCurrency, PriceFilter } from "../types/enums";
 import { getExchange } from "../services/exchangeRatesApiService";
+import { fromLowPriceToHight, fromHightPriceToLow } from "../tools/sortingFunctions";
 
 export const uploadBooks = ():ThunkAction<Promise<void>,{},{},AnyAction> => {
     return async(dispatch:ThunkDispatch<{}, {}, AnyAction>):Promise<void> => { 
@@ -13,6 +14,8 @@ export const uploadBooks = ():ThunkAction<Promise<void>,{},{},AnyAction> => {
         dispatch(printingEditionsError(false))
         try{
             const editions = await printingEditionsService.getEditions();
+            fromLowPriceToHight(editions);
+            // fromHightPriceToLow(editions);
             
             dispatch(printingEditionsLoaded(editions));
             dispatch(printingEditionsFetching(false));
@@ -52,5 +55,17 @@ export const changeCurrency = (toCurrency:EditionCurrency):ThunkAction<Promise<v
             console.log("edition", edition);
         })
         dispatch(printingEditionsChangeCurrency(currentState.printingEdition.printingEditions,toCurrency))
+    }
+}
+export const changeSortingWay = (sortingWay:PriceFilter):ThunkAction<Promise<void>,{},{},AnyAction> => {
+    return async(dispatch:ThunkDispatch<{}, {}, AnyAction>):Promise<void> => {
+        const currentState = store.getState();
+        const editions = currentState.printingEdition.printingEditions;
+        if(sortingWay === PriceFilter.LowToHight){
+            fromLowPriceToHight(editions)
+        }else{
+            fromHightPriceToLow(editions)
+        }
+        dispatch(printingEditionsChangeSortingWay(sortingWay,editions))
     }
 }

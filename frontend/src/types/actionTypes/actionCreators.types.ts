@@ -1,6 +1,6 @@
 import { printingEditionConstants } from "./constants/printindEditions.constants";
 import { PrintingEdition } from "../printingEdition";
-import { EditionCurrency } from "../enums";
+import { EditionCurrency, PriceFilter } from "../enums";
 
 export interface PrintingEditionsLoadedAction{
     type: "PRS_LOADED",
@@ -23,5 +23,12 @@ export interface PrintingEditionsChangeCurrency{
     EditionsWithNewCurrency:PrintingEdition[],
     newCurrency:EditionCurrency;
 }
+export interface PrintingEditionsSortingByPrice{
+    type:"PRS_SORT_BY_PRICE",
+    newSortingWay:PriceFilter,
+    replacedEditions:PrintingEdition[]
+}
 export type PrintingEditionsActionTypes = PrintingEditionsLoadedAction | 
-PrintingEditionsFetchingAction |PrintingEditionsErrorAction | PrintingEditionSearch | PrintingEditionsChangeCurrency;
+PrintingEditionsFetchingAction |PrintingEditionsErrorAction | 
+PrintingEditionSearch | PrintingEditionsChangeCurrency
+|PrintingEditionsSortingByPrice;

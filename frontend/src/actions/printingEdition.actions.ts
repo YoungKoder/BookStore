@@ -4,8 +4,9 @@ import {
     PrintingEditionsFetchingAction, 
     PrintingEditionsErrorAction,
     PrintingEditionSearch,
-    PrintingEditionsChangeCurrency} from "../types/actionTypes/actionCreators.types"
-import { EditionCurrency } from "../types/enums"
+    PrintingEditionsChangeCurrency,
+    PrintingEditionsSortingByPrice} from "../types/actionTypes/actionCreators.types"
+import { EditionCurrency, PriceFilter } from "../types/enums"
 
 
 export const printingEditionsLoaded = (newBooks:PrintingEdition[]):PrintingEditionsLoadedAction =>{
@@ -36,7 +37,6 @@ export const printingEditionsError = (error:boolean):PrintingEditionsErrorAction
     }
 }
 export const printingEditionSearched = (searched:PrintingEdition[]):PrintingEditionSearch =>{
-    // console.log("i was called printingEditionSearched ");
     return{
         type:"PRS_SEARCH",
         searchedPrintingEditions:searched
@@ -47,5 +47,12 @@ export const printingEditionsChangeCurrency = (payload:PrintingEdition[],currenc
         type:"PRS_CHANGE__CURRENCY",
         EditionsWithNewCurrency:payload,
         newCurrency:currency
+    }
+}
+export const printingEditionsChangeSortingWay = (newSortingWay:PriceFilter, replacedEditions:PrintingEdition[]):PrintingEditionsSortingByPrice => {
+    return {
+        type:"PRS_SORT_BY_PRICE",
+        newSortingWay,
+        replacedEditions
     }
 }

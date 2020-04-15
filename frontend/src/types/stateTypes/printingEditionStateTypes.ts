@@ -1,9 +1,10 @@
 import { PrintingEdition } from "../printingEdition";
-import { EditionCurrency } from "../enums";
+import { EditionCurrency, PriceFilter } from "../enums";
 
 export interface PrintingEditionsState{
     printingEditions: PrintingEdition[],
     isFetching: boolean,
     error:string,
-    currency:EditionCurrency
+    currency:EditionCurrency,
+    sortingByPrice:PriceFilter
 }
