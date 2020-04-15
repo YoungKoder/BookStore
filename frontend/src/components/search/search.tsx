@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { ThunkDispatch } from 'redux-thunk';
+import { connect } from 'react-redux'
+import { searchEditions, uploadBooks } from "../../actions/printindEditionActionDispachers";
 
 import "./search.scss";
-import { searchEditions, uploadBooks } from "../../actions/printingEdition.actions";
-import { connect } from 'react-redux'
+
 
 interface DispatchProps{
     searchPrintingEditions: (searched:string)=>void ,

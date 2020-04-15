@@ -2,27 +2,31 @@ import React, { useState, useEffect } from "react";
 
 import "./drobdown.scss";
 import { DrobdownMenuItem } from "../../../types/drobdownMenuItems";
-
+import { EditionCurrency } from "../../../types/enums";
 
 interface OwnProps{
-    defaultFilter:string
+    defaultFilterCurrency:EditionCurrency
     drobdownsMenuItems:DrobdownMenuItem[]
+    actionFunction: (toCurrency:EditionCurrency)=>void
+    uplodBooks: ()=>void
 }
 
 type Props = OwnProps;
-export const Drobdown:React.SFC<Props> = (drobdownsItems:OwnProps)=>{
+export const Drobdown:React.SFC<Props> = (OwnProps:OwnProps)=>{
 
-    const {defaultFilter,drobdownsMenuItems } = drobdownsItems;
-    let drobdownMenuItemsClass = "drobdown_menuItems";
+    const {defaultFilterCurrency,drobdownsMenuItems } = OwnProps;
 
     const [currentFilter, setCurrentFilter] = useState({
-        currentFilter:defaultFilter
+        currentFilter:defaultFilterCurrency
     })
+
+    const [filterWasChanged, setFilterChange] = useState({changed:false});
 
     const [visibleMenu, setVisibleMenu] = useState({
         visible:false
     })
 
+    
     const [className, setClassName] = useState({
         drobdownMenuItemsClass:"drobdown_menuItems"
     })
@@ -39,6 +43,13 @@ export const Drobdown:React.SFC<Props> = (drobdownsItems:OwnProps)=>{
             })
         }
     },[visibleMenu.visible])
+     
+    useEffect(()=>{
+        if(filterWasChanged.changed){
+            OwnProps.actionFunction(currentFilter.currentFilter);
+        }
+        // return ()=>console.log("I am going to destroy");
+    },[currentFilter.currentFilter])
 
     const showMenu = ()=>{
         setVisibleMenu(({visible})=>{
@@ -52,6 +63,11 @@ export const Drobdown:React.SFC<Props> = (drobdownsItems:OwnProps)=>{
         setCurrentFilter({
             currentFilter:e.target.innerText
         })
+
+        setFilterChange({
+            changed:true
+        })
+        // OwnProps.actionFunction(currentFilter.currentFilter);
     }
 
 
@@ -62,7 +78,7 @@ export const Drobdown:React.SFC<Props> = (drobdownsItems:OwnProps)=>{
         <>
         <div className="drobdown">
             <div onClick={showMenu} className="drobdown_title">
-                <p>{currentFilter.currentFilter}</p>
+                <p className="drobdown_titlePargraph">{currentFilter.currentFilter}</p>
             </div>
             <ul className={className.drobdownMenuItemsClass}>
                 {

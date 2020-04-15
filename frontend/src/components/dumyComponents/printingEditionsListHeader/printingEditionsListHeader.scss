@@ -1,0 +1,33 @@
+@import "../../../assets/variables.scss";
+
+.catalog_header{
+    padding-top: 5rem;
+    padding-bottom:3rem;
+    width: 100%;
+    font-family: $headers;
+    h2{
+        font-size: 48px;
+        margin:0;
+    }
+
+    &__rightFilters{
+        padding-right: 0px;
+        font-size: 20px;
+        color:$action;
+        font-weight: normal;
+    }
+}
+.currency{
+    margin-right:1.3rem;
+    p{
+        margin-right: 1rem;
+    }
+    .drobdown{
+        min-width: 85px;
+    }
+}
+.sortingByPrice{
+    p{
+        margin-right: 1rem;
+    }
+}

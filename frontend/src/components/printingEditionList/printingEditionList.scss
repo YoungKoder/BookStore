@@ -1,23 +1,6 @@
 @import "../../assets/variables.scss";
 
 .catalog{
-    &_header{
-        padding-top: 5rem;
-        padding-bottom:3rem;
-        width: 100%;
-        font-family: $headers;
-        h2{
-            font-size: 48px;
-            margin:0;
-        }
-
-        &__rightFilters{
-            padding-right: 0px;
-            font-size: 20px;
-            color:$action;
-            font-weight: normal;
-        }
-    }
     &_content{
         width: 100%;
     }

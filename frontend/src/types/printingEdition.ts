@@ -1,18 +1,8 @@
+import { EditionCurrency, EditionType } from "./enums";
+
 interface Author{
     _id:string,
     name:string
-}
-
-enum EditionType {
-    book = 1,
-    magazine = 2,
-    comics = 3
-
-}
-export enum EditionCurrency{
-    USD ="USD",
-    RUB="RUB",
-    EUR="EUR"
 }
 
 export interface PrintingEdition{
