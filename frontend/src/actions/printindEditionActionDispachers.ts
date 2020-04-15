@@ -43,8 +43,6 @@ export const changeCurrency = (toCurrency:EditionCurrency):ThunkAction<Promise<v
         const currentState = store.getState();
         
         const currencyFrom:EditionCurrency = currentState.printingEdition.currency;
-        console.log("Currency from state",currencyFrom)
-        console.log("Choosen Currency ",toCurrency)
         const exchange = await getExchange(currencyFrom, toCurrency);
 
         currentState.printingEdition.printingEditions.map((edition) => {
@@ -53,7 +51,6 @@ export const changeCurrency = (toCurrency:EditionCurrency):ThunkAction<Promise<v
             edition.currency = toCurrency;
             console.log("edition", edition);
         })
-        console.log("new printing editions",currentState.printingEdition.printingEditions)
         dispatch(printingEditionsChangeCurrency(currentState.printingEdition.printingEditions,toCurrency))
     }
 }

@@ -48,7 +48,6 @@ export const Drobdown:React.SFC<Props> = (OwnProps:OwnProps)=>{
         if(filterWasChanged.changed){
             OwnProps.actionFunction(currentFilter.currentFilter);
         }
-        // return ()=>console.log("I am going to destroy");
     },[currentFilter.currentFilter])
 
     const showMenu = ()=>{

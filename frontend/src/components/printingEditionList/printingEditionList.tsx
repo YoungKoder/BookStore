@@ -28,11 +28,6 @@ type Props = StateProps & DispatchProps & OwnProps
 
 
 const PrintingEditionList:React.SFC<Props> = (props:Props)=> {
-    // const action = useCallback(()=> props.uploadBooks(), [props.printingEditions.printingEditions])
-    // useEffect(()=>{
-    //     action()
-    // },[props.printingEditions.printingEditions])
-
     useEffect(()=>{
         props.uploadBooks()
     },[])
