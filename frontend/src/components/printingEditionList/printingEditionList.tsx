@@ -5,11 +5,10 @@ import { PrintingEditionListItem } from "../dumyComponents/printingEditionListIt
 import { RootState } from "../../store";
 import { ThunkDispatch } from 'redux-thunk'
 import { connect } from 'react-redux'
-import { Spinner } from "../dumyComponents/spinner/spinner";
-import { ErrorIndicator } from "../dumyComponents/eror-indicator/error-indicator";
-import PrintingEditionsListHeader from "../dumyComponents/printingEditionsListHeader/printingEditionsListHeader";
+import PrintingEditionsListHeader from "../printingEditionsListHeader/printingEditionsListHeader";
 
 import "./printingEditionList.scss";
+import { PrintingEditionListContent } from "../dumyComponents/printingEditionsListContent/printingEditionListContent";
 
 
 interface OwnProps{
@@ -33,46 +32,29 @@ const PrintingEditionList:React.SFC<Props> = (props:Props)=> {
     },[])
     return(
         <>
-        <div className="catalog container">
-            <PrintingEditionsListHeader/>
-            <div className="row">
-                <div className="catalog_content d-flex justify-content-between">
-                    <div className="filters col">
-                         
-                    </div>
-                    <div className="itemsCards col-9">
-                    {props.printingEditions.isFetching && <Spinner/>}
-                    {props.printingEditions.error && <ErrorIndicator/>}
-                    {!props.printingEditions.isFetching && <ul className=" cardsList d-flex justify-content-between">             
-                        {
-                            props.printingEditions.printingEditions.map((edition) =>{
-                                return(
-                                    <li key={edition._id}><PrintingEditionListItem  
-                                        {...edition}
-                                    /></li>
-                                ) 
-                            })
-                        }
-                    </ul>}
-                    </div>
-                </div>
+            <div className="catalog container">
+                <PrintingEditionsListHeader/>
+                <PrintingEditionListContent isFetching={props.printingEditions.isFetching} error = {props.printingEditions.error} 
+                printingEditions = {props.printingEditions.printingEditionsToShow}/>
             </div>
-        </div>
-            
-
         </>
-        
     )
 }
 
 const mapStateToProps = (states: RootState) => {
     return {
         printingEditions: {
-            printingEditions:states.printingEdition.printingEditions,
+            uploadPrintingEditions:states.printingEdition.uploadPrintingEditions,
+            printingEditionsToShow:states.printingEdition.printingEditionsToShow,
+            filteredEditions:states.printingEdition.filteredEditions,
+            serchedEditions:states.printingEdition.serchedEditions,
+            doesSearchOn:states.printingEdition.doesSearchOn,
+            doesFilterAdded:states.printingEdition.doesFilterAdded,
             isFetching:states.printingEdition.isFetching,
             error:states.printingEdition.error,
             currency:states.printingEdition.currency,
-            sortingByPrice:states.printingEdition.sortingByPrice
+            sortingByPrice:states.printingEdition.sortingByPrice,
+            types:states.printingEdition.types
         }
     }
 }

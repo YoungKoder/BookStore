@@ -1,0 +1,11 @@
+@import "../../assets/variables.scss";
+
+.filters{
+    background: $gray;
+    background: rgba($gray, $alpha: .05);
+    padding: 3rem 2rem;
+    font-family: $headers;
+    font-weight: 500;
+    color:$header;
+    height: 500px;
+}

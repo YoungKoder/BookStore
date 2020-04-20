@@ -1,12 +1,12 @@
 import React from "react";
-import { Drobdown } from "../dropdown/drobdown";
-import { DrobdownMenuItem } from "../../../types/drobdownMenuItems";
-import { EditionCurrency, PriceFilter } from "../../../types/enums";
+import { Drobdown } from "../dumyComponents/dropdown/drobdown";
+import { DrobdownMenuItem } from "../../types/drobdownMenuItems";
+import { EditionCurrency, PriceFilter } from "../../types/enums";
 import { connect } from 'react-redux'
 
 import "./printingEditionsListHeader.scss";
 import { ThunkDispatch } from "redux-thunk";
-import { changeCurrency, changeSortingWay } from "../../../actions/printindEditionActionDispachers";
+import { changeCurrency, changeSortingWay } from "../../actions/printindEditionActionDispachers";
 
 interface DispatchProps{
     changeCurrency: (s:EditionCurrency|any)=>void,

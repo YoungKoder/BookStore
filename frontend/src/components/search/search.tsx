@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ThunkDispatch } from 'redux-thunk';
 import { connect } from 'react-redux'
 import { searchEditions, uploadBooks } from "../../actions/printindEditionActionDispachers";
@@ -17,17 +17,16 @@ const Search:React.SFC<DispatchProps> = (props:DispatchProps)=>{
         title:""
     })
 
+    useEffect(()=>{
+        props.searchPrintingEditions(title.title)
+    },[title.title])
+
     const onchange = (e:any) =>{
         setTitle({
             ...title,
             [e.target.name]:e.target.value
         });
-
-        if(e.target.value!==""){
-            props.searchPrintingEditions(e.target.value)
-        }else{
-            props.uploadEditions()
-        }
+        console.log(e.target.value)
     }
 
     return(

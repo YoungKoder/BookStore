@@ -5,8 +5,9 @@ import {
     PrintingEditionsErrorAction,
     PrintingEditionSearch,
     PrintingEditionsChangeCurrency,
-    PrintingEditionsSortingByPrice} from "../types/actionTypes/actionCreators.types"
-import { EditionCurrency, PriceFilter } from "../types/enums"
+    PrintingEditionsSortingByPrice,
+    PrintingEditionSortingByType} from "../types/actionTypes/actionCreators.types"
+import { EditionCurrency, PriceFilter, EditionType } from "../types/enums"
 
 
 export const printingEditionsLoaded = (newBooks:PrintingEdition[]):PrintingEditionsLoadedAction =>{
@@ -36,10 +37,11 @@ export const printingEditionsError = (error:boolean):PrintingEditionsErrorAction
         }
     }
 }
-export const printingEditionSearched = (searched:PrintingEdition[]):PrintingEditionSearch =>{
+export const printingEditionSearched = (searched:PrintingEdition[],doesSearchOn:boolean):PrintingEditionSearch =>{
     return{
         type:"PRS_SEARCH",
-        searchedPrintingEditions:searched
+        searchedPrintingEditions:searched,
+        doesSearchOn
     }
 }
 export const printingEditionsChangeCurrency = (payload:PrintingEdition[],currency:EditionCurrency):PrintingEditionsChangeCurrency =>{
@@ -54,5 +56,13 @@ export const printingEditionsChangeSortingWay = (newSortingWay:PriceFilter, repl
         type:"PRS_SORT_BY_PRICE",
         newSortingWay,
         replacedEditions
+    }
+}
+export const printingEditionsFilterByType = (sortedEditions: PrintingEdition[],doesFilterAdded:boolean,filterType:EditionType):PrintingEditionSortingByType => {
+    return{
+        type:"PRS_SORT_BY_TYPE",
+        sortedPrintingEditions:sortedEditions,
+        doesFilterAdded,
+        filterType
     }
 }

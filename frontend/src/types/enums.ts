@@ -5,6 +5,7 @@ export enum EditionCurrency{
 }
 
 export enum EditionType {
+    default = 0,
     book = 1,
     magazine = 2,
     comics = 3
