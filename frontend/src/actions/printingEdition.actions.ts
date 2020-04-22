@@ -6,7 +6,8 @@ import {
     PrintingEditionSearch,
     PrintingEditionsChangeCurrency,
     PrintingEditionsSortingByPrice,
-    PrintingEditionSortingByType} from "../types/actionTypes/actionCreators.types"
+    PrintingEditionSortingByType,
+    ChangePage} from "../types/actionTypes/actionCreators.types"
 import { EditionCurrency, PriceFilter, EditionType } from "../types/enums"
 
 
@@ -64,5 +65,11 @@ export const printingEditionsFilterByType = (sortedEditions: PrintingEdition[],d
         sortedPrintingEditions:sortedEditions,
         doesFilterAdded,
         filterType
+    }
+}
+export const changePage = (currentPrintingEditions:PrintingEdition[]):ChangePage =>{
+    return{
+        type:"CHANGE_PAGE",
+        currentPrintingEditions
     }
 }

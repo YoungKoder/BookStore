@@ -1,4 +1,4 @@
-import { printingEditionsLoaded, printingEditionsFetching, printingEditionsError, printingEditionSearched, printingEditionsChangeCurrency, printingEditionsChangeSortingWay, printingEditionsFilterByType } from "./printingEdition.actions";
+import { printingEditionsLoaded, printingEditionsFetching, printingEditionsError, printingEditionSearched, printingEditionsChangeCurrency, printingEditionsChangeSortingWay, printingEditionsFilterByType, changePage } from "./printingEdition.actions";
 import { ThunkAction, ThunkDispatch } from "redux-thunk";
 import { AnyAction } from "redux";
 import { printingEditionsService } from "../services/printingEditionsService";
@@ -96,5 +96,10 @@ export const sortByType = (type:EditionType):ThunkAction<Promise<void>,{},{},Any
         else if(type === EditionType.default && !currentState.printingEdition.doesSearchOn){
             dispatch(printingEditionsFilterByType(currentState.printingEdition.uploadPrintingEditions,false,type))
         }
+    }
+}
+export const setCurrentEditions = (currentEditions:PrintingEdition[]):ThunkAction<Promise<void>,{},{},AnyAction>=>{
+    return async(dispatch:ThunkDispatch<{}, {}, AnyAction>):Promise<void> => {
+        dispatch(changePage(currentEditions));
     }
 }

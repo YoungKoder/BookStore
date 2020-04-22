@@ -35,8 +35,12 @@ export interface PrintingEditionSortingByType{
     doesFilterAdded:boolean,
     filterType:EditionType
 }
+export interface ChangePage{
+    type:"CHANGE_PAGE",
+    currentPrintingEditions:PrintingEdition[]
+}
 
 export type PrintingEditionsActionTypes = PrintingEditionsLoadedAction | 
 PrintingEditionsFetchingAction |PrintingEditionsErrorAction | 
 PrintingEditionSearch | PrintingEditionsChangeCurrency
-|PrintingEditionsSortingByPrice | PrintingEditionSortingByType;
+|PrintingEditionsSortingByPrice | PrintingEditionSortingByType |ChangePage;

@@ -1,0 +1,19 @@
+@import "../../assets/variables.scss";
+
+.page-item{
+    font-size: .8rem;
+    text-align: center;
+    &.active{
+        background: #423652;
+        a{
+            color:#fff;
+        }
+    }
+}
+.page-link{
+    color:#423652;
+    text-decoration: none;
+    display: block;
+    padding: 10px 15px;
+    text-align: center;
+}

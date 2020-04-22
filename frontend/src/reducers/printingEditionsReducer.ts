@@ -65,6 +65,11 @@ const reduce = (state:PrintingEditionsState = editions, action:PrintingEditionsA
                     action.filterType
                 ]
             }
+        case "CHANGE_PAGE":
+            return{
+                ...state,
+                printingEditionsToShow:action.currentPrintingEditions
+            }
         default:
             return state;
     }
