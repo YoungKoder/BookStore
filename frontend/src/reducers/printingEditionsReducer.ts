@@ -15,7 +15,8 @@ const editions:PrintingEditionsState = {
     error:"",
     currency:EditionCurrency.USD,
     sortingByPrice:PriceFilter.LowToHight,
-    types:[]
+    types:[],
+    appliedFilters:[]
 }
 const reduce = (state:PrintingEditionsState = editions, action:PrintingEditionsActionTypes):PrintingEditionsState => {
     switch (action.type){

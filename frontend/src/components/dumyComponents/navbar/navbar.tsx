@@ -2,6 +2,9 @@ import React from "react";
 import "./navbar.scss";
 import logo from "../../../assets/images/Book_Logo_svg.jpg"
 import {Link}from "react-router-dom";
+import { Modal } from "../modalWindow/modalWindow";
+import { SignInTrigger } from "./signInTrigger";
+import { SignInPage } from "../../pages/signInPage";
 
 export const Navbar:React.FC<{}> = ()=>{
     return(
@@ -11,7 +14,14 @@ export const Navbar:React.FC<{}> = ()=>{
                     <Link to="/" className="d-flex"><img src={logo} alt="logo"/></Link>
                     <div className="navbar_rightContent align-items-center d-flex ">
                         <div className="login d-flex align-items-center ">
-                            <Link className="login-btn" to="/signUp">Login</Link>
+                            <Modal>
+                                {
+                                    {
+                                        trigger: <SignInTrigger/>,
+                                        content:<SignInPage/>
+                                    }
+                                }
+                            </Modal>
                             <Link className="login-btn icon" to="/signUp"><i className="fa fa-user" aria-hidden="true"></i></Link>
                         </div>
                         <div className="basket">

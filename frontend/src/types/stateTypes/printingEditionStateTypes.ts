@@ -12,5 +12,6 @@ export interface PrintingEditionsState{
     error:string,
     currency:EditionCurrency,
     sortingByPrice:PriceFilter,
-    types:EditionType[]
+    types:EditionType[],
+    appliedFilters: string[]
 }

@@ -1,0 +1,14 @@
+@import "../../../assets/variables.scss";
+
+.cardInfo__orderRow{
+    margin-top: 2.3rem;
+    font-family: $headers;
+    font-size: 1.2rem;
+    color:$action;
+    font-weight: normal;
+}
+.amount{
+    &_Select{
+        margin: 0 2rem;
+    }
+}

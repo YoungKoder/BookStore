@@ -4,16 +4,16 @@ import { Spinner } from "../spinner/spinner";
 import { ErrorIndicator } from "../eror-indicator/error-indicator";
 import { PrintingEditionListItem } from "../printingEditionListItem/printingEditionListItem";
 import Filters from "../../filters/filters";
+import {withRouter, RouteComponentProps} from "react-router-dom";
 
 import "./printingEditionListContent.scss";
 
-interface OwnProps{
+interface OwnProps extends RouteComponentProps{
     isFetching:Boolean,
     error:String,
     printingEditions:PrintingEdition[]
 }
-
-export const PrintingEditionListContent = (Props:OwnProps) =>{
+ const PrintingEditionListContent = (Props:OwnProps) =>{
     const {isFetching, error, printingEditions} = Props;
     useEffect(()=>{
         console.log(">>>editions for view", printingEditions);
@@ -30,9 +30,8 @@ export const PrintingEditionListContent = (Props:OwnProps) =>{
                             {
                                 printingEditions.map((edition) =>{
                                     return(
-                                        <li key={edition._id}><PrintingEditionListItem  
-                                            {...edition}
-                                        /></li>
+                                        <li key={edition._id} onClick={()=>Props.history.push(`/${edition._id}`)}>
+                                            <PrintingEditionListItem {...edition}/></li>
                                     ) 
                                 })
                             }
@@ -43,3 +42,4 @@ export const PrintingEditionListContent = (Props:OwnProps) =>{
         </>
     )
 }
+export default withRouter<OwnProps,any>(PrintingEditionListContent);

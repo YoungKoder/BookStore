@@ -39,6 +39,7 @@ export class PrintingEditionsController implements Controller{
     private getThePrintingEdByID = async(req:express.Request,res:express.Response)=>{
         const id = req.params.id;
         const printingEditionentity = await findPrintingEditionByID(id);
+        await printingEditionentity.populate('author_ids','name').execPopulate();
         res.send(printingEditionentity);
     }
 

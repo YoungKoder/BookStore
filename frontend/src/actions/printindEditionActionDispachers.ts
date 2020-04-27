@@ -48,6 +48,30 @@ export const searchEditions = (s:string):ThunkAction<Promise<void>,{},{},AnyActi
             }
     }   
 }
+// export const searchEditions = (s:string):ThunkAction<Promise<void>,{},{},AnyAction> =>{
+//     return async(dispatch:ThunkDispatch<{}, {}, AnyAction>):Promise<void>=>{
+//         const currentState = store.getState();
+//         let applieadFilters = currentState.printingEdition.appliedFilters;
+//         let searchedEdition = searchEdition(s,currentState.printingEdition.printingEditionsToShow)
+
+//         console.log("serched Editions:", searchedEdition);
+//         if(s){
+//             let index = applieadFilters.indexOf("SEARCH");
+//             if(index ===-1){
+//                 applieadFilters.push("SEARCH");
+//             }
+//             dispatch(printingEditionSearched(searchedEdition,true)) 
+//         }else{
+//             let index = applieadFilters.indexOf("SEARCH");
+//             applieadFilters.splice(index,1);
+//             if(applieadFilters.length === 0){
+//                 dispatch(printingEditionSearched(searchedEdition,false)) 
+//             }
+//         }
+
+
+//     }
+// }
 export const changeCurrency = (toCurrency:EditionCurrency):ThunkAction<Promise<void>,{},{},AnyAction> => {
     return async(dispatch:ThunkDispatch<{}, {}, AnyAction>):Promise<void> => {
         

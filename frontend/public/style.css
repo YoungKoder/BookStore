@@ -3,6 +3,7 @@
 
 
 body{
+    position:relative;
     font-size: 18px;
     font-family: 'Poppins', sans-serif;
     color:#615F5F;
@@ -15,4 +16,7 @@ p,ul{
 ul{
     list-style: none;
     padding: 0;
+}
+h1,h2,h3,h4,h5{
+    margin:0;
 }
