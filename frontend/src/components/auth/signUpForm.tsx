@@ -9,30 +9,39 @@ import {
 import * as yup from "yup";
 import { SignUpUserData, InitialValues } from "../../types/SignUpUserData";
 import ApiServiceBookStore from "../../services/api-service";
+import { FormWrapper } from "../dumyComponents/formWrapper/formWrapper";
 
 const serviceApi = new ApiServiceBookStore();
 const SignUpInnerForm = (props:FormikProps<SignUpUserData>)=>{
     const {touched, errors, isSubmitting} = props;
     return(
         <>
-            <Form>
-                <Field type="userName" name = "userName" placeholder="User name"/>
-                {touched.userName && errors.userName && <div>{errors.userName}</div>}
-                <Field type="first_name" name = "first_name" placeholder="First name"/>
-                {touched.first_name && errors.first_name && <div>{errors.first_name}</div>}
-                <Field type="last_name" name = "last_name" placeholder="Last name"/>
-                {touched.last_name && errors.last_name && <div>{errors.last_name}</div>}
-                <Field type="email" name = "email" placeholder="Email"/>
-                {touched.email && errors.email && <div>{errors.email}</div>}
-                <Field type="password" name = "password" placeholder="Password"/>
-                {touched.password && errors.password && <div>{errors.password}</div>}
-                <Field type="password" name = "confirmPassword" placeholder="Confirm password"/>
-                {touched.confirmPassword && errors.confirmPassword && <div>{errors.confirmPassword}</div>}
-
-                <button type="submit" disabled={isSubmitting}>
-                    Sumbit
-                </button>
-            </Form>  
+            <FormWrapper isAuth = {true}>
+                {
+                    {
+                        content:<Form className="authFormInner">
+                            <Field type="userName" name = "userName" placeholder="User name"/>
+                            {touched.userName && errors.userName && <div>{errors.userName}</div>}
+                            <Field type="first_name" name = "first_name" placeholder="First name"/>
+                            {touched.first_name && errors.first_name && <div>{errors.first_name}</div>}
+                            <Field type="last_name" name = "last_name" placeholder="Last name"/>
+                            {touched.last_name && errors.last_name && <div>{errors.last_name}</div>}
+                            <Field type="email" name = "email" placeholder="Email"/>
+                            {touched.email && errors.email && <div>{errors.email}</div>}
+                            <Field type="password" name = "password" placeholder="Password"/>
+                            {touched.password && errors.password && <div>{errors.password}</div>}
+                            <Field type="password" name = "confirmPassword" placeholder="Confirm password"/>
+                            {touched.confirmPassword && errors.confirmPassword && <div>{errors.confirmPassword}</div>}
+        
+                            <button type="submit" disabled={isSubmitting}>
+                                Sumbit
+                            </button>
+                        </Form>
+                    
+                    }
+                }
+                
+            </FormWrapper>
         </>
     )
 }

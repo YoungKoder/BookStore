@@ -3,8 +3,8 @@ import "./navbar.scss";
 import logo from "../../../assets/images/Book_Logo_svg.jpg"
 import {Link}from "react-router-dom";
 import { Modal } from "../modalWindow/modalWindow";
-import { SignInTrigger } from "./signInTrigger";
 import { SignInPage } from "../../pages/signInPage";
+import { SignUpPage } from "../../pages/signUpPage";
 
 export const Navbar:React.FC<{}> = ()=>{
     return(
@@ -17,12 +17,20 @@ export const Navbar:React.FC<{}> = ()=>{
                             <Modal>
                                 {
                                     {
-                                        trigger: <SignInTrigger/>,
+                                        trigger: <span className="signInTrigger">Login</span>,
                                         content:<SignInPage/>
                                     }
                                 }
                             </Modal>
-                            <Link className="login-btn icon" to="/signUp"><i className="fa fa-user" aria-hidden="true"></i></Link>
+                            <Modal>
+                                {
+                                    {
+                                        trigger: <i className="fa fa-user" aria-hidden="true"></i>,
+                                        content:<SignUpPage/>
+                                    }
+                                }
+                            </Modal>
+                            
                         </div>
                         <div className="basket">
                             <Link className="basket-btn icon" to="/" data-badge="6">

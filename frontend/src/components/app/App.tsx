@@ -7,9 +7,13 @@ import { Navbar } from '../dumyComponents/navbar/navbar';
 import 'font-awesome/css/font-awesome.min.css';
 import { Header } from '../dumyComponents/header/header';
 import { EditionCardInfo } from '../printingEditionCardInfo/editionCardInfo';
+import store from '../../store';
+import { PrintingEdition } from '../../types/printingEdition';
 
 
 const App =()=>{
+
+    const editions:PrintingEdition[] = store.getState().printingEdition.uploadPrintingEditions;
     return(
         <>
             <main role="main" className="container-fluid">
@@ -17,13 +21,21 @@ const App =()=>{
                     <Router>
                         <Route path="/" component={Navbar}/>
                         <Route path="/" component={Header}/>
-                        <Route path="/"  component={HomePage} exact/>
+                        <Route path="/"  component={HomePage} />
                         <Route path="/:id" render={({match})=>{
                             const{id} = match.params;
-                            return <EditionCardInfo matchedId={id}/>
+                            let checker;
+                            editions.forEach(element => {
+                                if(element._id === id){
+                                    checker = true;
+                                    return;
+                                }
+                                checker = false;
+                            });
+                            if(checker === true){
+                                return <EditionCardInfo matchedId = {id}/>
+                            }
                         }}/>
-                        <Route path="/signUp" render={()=><SignUpPage/>}/>
-                        <Route path="/signIn" render={()=><SignInPage/>}/>
                     </Router>
                 </div>
             </main>

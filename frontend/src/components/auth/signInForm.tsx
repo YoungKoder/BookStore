@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Children } from "react";
 
 import {
     FormikProps,
@@ -9,23 +9,33 @@ import {
 
 import * as yup from "yup";
 import { SignInUserData, InitialValues } from "../../types/SignUpUserData";
-import ApiServiceBookStore from "../../services/api-service";
+import { authService } from "../../services/authService";
 
-const serviceApi = new ApiServiceBookStore();
+import "./authForm.scss";
+import { FormWrapper } from "../dumyComponents/formWrapper/formWrapper";
+
 const SignInInnerForm = (props:FormikProps<SignInUserData>)=>{
     const {touched, errors, isSubmitting} = props;
     return(
         <>
-            <Form>
-                <Field type="email" name = "email" placeholder="Email"/>
-                {touched.email && errors.email && <div>{errors.email}</div>}
-                <Field type="password" name = "password" placeholder="Password"/>
-                {touched.password && errors.password && <div>{errors.password}</div>}
-
-                <button type="submit" disabled={isSubmitting}>
-                    Sumbit
-                </button>
-            </Form>  
+            <FormWrapper isAuth = {true}>
+                {
+                    {
+                        content:
+                            <Form className="authFormInner">
+                                <Field type="email" name = "email" placeholder="Email"/>
+                                {touched.email && errors.email && <div>{errors.email}</div>}
+                                <Field type="password" name = "password" placeholder="Password"/>
+                                {touched.password && errors.password && <div>{errors.password}</div>}
+    
+                                <button type="submit" disabled={isSubmitting}>
+                                    Sumbit
+                                </button>
+                            </Form>  
+                        
+                    }
+                }
+            </FormWrapper>
         </>
     )
 }
@@ -48,9 +58,13 @@ export const SignInForm = withFormik<InitialValues,SignInUserData >({
 
     handleSubmit:(values,{setSubmitting})=>{
         console.log(`Values from inputs${values}`);
-        serviceApi.signInUser(values);
-        setSubmitting(false);
-    },
-    
-
+        try{
+            authService.signInUser(values);
+            setSubmitting(false);
+        }
+        catch(error){
+            console.log("can't signIn");
+        };
+        
+    }
 })(SignInInnerForm);
