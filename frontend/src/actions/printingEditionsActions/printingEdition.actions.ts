@@ -1,4 +1,4 @@
-import { PrintingEdition } from "../types/printingEdition"
+import { PrintingEdition } from "../../types/printingEdition"
 import { 
     PrintingEditionsLoadedAction, 
     PrintingEditionsFetchingAction, 
@@ -7,8 +7,8 @@ import {
     PrintingEditionsChangeCurrency,
     PrintingEditionsSortingByPrice,
     PrintingEditionSortingByType,
-    ChangePage} from "../types/actionTypes/actionCreators.types"
-import { EditionCurrency, PriceFilter, EditionType } from "../types/enums"
+    ChangePage} from "../../types/actionTypes/actionCreators.types"
+import { EditionCurrency, PriceFilter, EditionType } from "../../types/enums"
 
 
 export const printingEditionsLoaded = (newBooks:PrintingEdition[]):PrintingEditionsLoadedAction =>{

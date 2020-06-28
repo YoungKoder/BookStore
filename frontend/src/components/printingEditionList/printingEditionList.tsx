@@ -1,6 +1,6 @@
 import React, { useEffect, useCallback, useState } from "react";
 import { PrintingEditionsState } from "../../types/stateTypes/printingEditionStateTypes";
-import { uploadBooks, setCurrentEditions } from "../../actions/printindEditionActionDispachers";
+import { uploadBooks, setCurrentEditions } from "../../actions/printingEditionsActions/printindEditionActionDispachers";
 import { PrintingEditionListItem } from "../dumyComponents/printingEditionListItem/printingEditionListItem";
 import { RootState } from "../../store";
 import { ThunkDispatch } from 'redux-thunk'

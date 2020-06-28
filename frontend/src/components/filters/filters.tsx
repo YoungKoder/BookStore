@@ -4,7 +4,7 @@ import "./filters.scss";
 import { TypeFilter } from "../dumyComponents/editionTypeFilter/editionTypeFilter";
 import { EditionType } from "../../types/enums";
 import { ThunkDispatch } from "redux-thunk";
-import { sortByType, uploadBooks } from "../../actions/printindEditionActionDispachers";
+import { sortByType, uploadBooks } from "../../actions/printingEditionsActions/printindEditionActionDispachers";
 
 import { connect } from 'react-redux'
 

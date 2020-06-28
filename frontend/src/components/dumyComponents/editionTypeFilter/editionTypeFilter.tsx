@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback } from "react";
 
 import "./editionTypeFilter.scss";
 import { EditionType } from "../../../types/enums";
-import { uploadBooks } from "../../../actions/printindEditionActionDispachers";
+import { uploadBooks } from "../../../actions/printingEditionsActions/printindEditionActionDispachers";
 
 interface OwnProps{
     id:string

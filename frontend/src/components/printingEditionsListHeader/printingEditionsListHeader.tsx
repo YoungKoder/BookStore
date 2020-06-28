@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 
 import "./printingEditionsListHeader.scss";
 import { ThunkDispatch } from "redux-thunk";
-import { changeCurrency, changeSortingWay } from "../../actions/printindEditionActionDispachers";
+import { changeCurrency, changeSortingWay } from "../../actions/printingEditionsActions/printindEditionActionDispachers";
 
 interface DispatchProps{
     changeCurrency: (s:EditionCurrency|any)=>void,

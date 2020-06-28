@@ -1,0 +1,28 @@
+@import "../../../assets/variables.scss";
+
+.btn{
+    display: inline;
+    font-size: 18px;
+    font-family:$headers;
+    font-weight: 600;
+    border: none;
+    &:hover{
+        cursor: pointer;
+    }
+}
+.btn--solid{
+    background-color: $action;
+    color:white;
+}
+.btn--outlined{
+    background: none;
+    border:2px solid  $action;
+    color:#B9B8B7;
+}
+
+.btn--regular{
+    padding: .6rem 2rem;
+}
+.btn--long{
+    padding: .6rem 4rem;
+}

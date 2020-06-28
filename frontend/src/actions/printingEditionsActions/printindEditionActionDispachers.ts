@@ -1,14 +1,14 @@
 import { printingEditionsLoaded, printingEditionsFetching, printingEditionsError, printingEditionSearched, printingEditionsChangeCurrency, printingEditionsChangeSortingWay, printingEditionsFilterByType, changePage } from "./printingEdition.actions";
 import { ThunkAction, ThunkDispatch } from "redux-thunk";
 import { AnyAction } from "redux";
-import { printingEditionsService } from "../services/printingEditionsService";
-import store from "../store";
-import { PrintingEdition } from "../types/printingEdition";
-import { EditionCurrency, PriceFilter, EditionType } from "../types/enums";
-import { getExchange } from "../services/exchangeRatesApiService";
-import { fromLowPriceToHight, fromHightPriceToLow } from "../tools/sortingFunctions";
-import { findByType } from "../tools/findByTypeFunction";
-import { searchEdition } from "../tools/searchEdition";
+import { printingEditionsService } from "../../services/printingEditionsService";
+import store from "../../store";
+import { PrintingEdition } from "../../types/printingEdition";
+import { EditionCurrency, PriceFilter, EditionType } from "../../types/enums";
+import { getExchange } from "../../services/exchangeRatesApiService";
+import { fromLowPriceToHight, fromHightPriceToLow } from "../../tools/sortingFunctions";
+import { findByType } from "../../tools/findByTypeFunction";
+import { searchEdition } from "../../tools/searchEdition";
 
 export const uploadBooks = ():ThunkAction<Promise<void>,{},{},AnyAction> => {
     return async(dispatch:ThunkDispatch<{}, {}, AnyAction>):Promise<void> => { 

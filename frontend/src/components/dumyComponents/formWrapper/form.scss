@@ -1,12 +1,40 @@
 @import "../../../assets/variables.scss";
 
 .formOuter{
-    padding:1rem 2rem 2rem 2rem;
+    box-sizing: border-box;
+    padding:1rem 7rem 2rem 7rem;
     background-color:$backgroundAuthForms;
 
-    &_fakeUserLogo{
-        display: flex;
-        justify-content: center;
+    &_header{
         margin-bottom: 1rem;
     }
+
+    &__title{
+        font-family: $headers;
+        font-size: 24px;
+        color:$action;
+    }
+
+    input{
+        background-color:rgba($color: #868686, $alpha: 0.3);
+        border:none;
+        width: 550px;
+        padding: .6rem .2rem;
+        color:#fff;
+        &::placeholder{
+            color:rgba($color: #868686, $alpha: 0.0);
+        }
+    }
+
+    label{
+        color:#fff;
+        font-size: 18px;
+        font-family: "Oswald";
+        color:#FEFEFE;
+        opacity: .7;
+    }
+}
+.userLogo{
+    display: flex;
+    justify-content: center;
 }
