@@ -6,6 +6,7 @@ import {Link}from "react-router-dom";
 import { SignInForm } from "../../auth/signInForm";
 import { SignUpForm } from "../../auth/signUpForm";
 import Modal from "react-modal";
+import { ModalTopBar } from "../modalTopBarWithCloseButton/modalTopBar";
 
 export const Navbar:React.FC<{}> = ()=>{
     const customStyles = {
@@ -24,14 +25,21 @@ export const Navbar:React.FC<{}> = ()=>{
     const [modalSignUpIsOpen,setIsSignUpOpen] = React.useState(false);
 
     const openSignInModal= ()=> {
+        document.body.style.position = "fixed"
         setIsSignInOpen(true);
     }
     const openSignUpModal =()=>{
         setIsSignUpOpen(true);
     }
 
-    const closeModal= ()=>{
-        console.log("i am trying to switch modal");
+    const closeSignInForm = () =>{
+        setIsSignInOpen(false);
+    }
+    const closeSignUpForm = () =>{
+        setIsSignUpOpen(false);
+    }
+
+    const switchModal= ()=>{
         setIsSignInOpen(false);
         setIsSignUpOpen(true);
     }
@@ -46,34 +54,20 @@ export const Navbar:React.FC<{}> = ()=>{
                         <span className="signInTrigger" onClick={openSignInModal}>Login</span>
                             <Modal 
                                 isOpen={modalSignInIsOpen}
-                                onRequestClose={closeModal}
-                                style={customStyles}
-                                // className="modalF"
+                                onRequestClose={closeSignInForm}
+                                className="Modal"
                             >
-                                <SignInForm closeModal={closeModal}/>
+                                <ModalTopBar closeModal={closeSignInForm}/>
+                                <SignInForm closeModal={switchModal}/>
                             </Modal>
                             <i onClick={openSignUpModal} className="fa fa-user" aria-hidden="true"></i>
                             <Modal
                                 isOpen={modalSignUpIsOpen}
-                                style={customStyles}>
+                                onRequestClose={closeSignUpForm}
+                                className="Modal">
+                                   <ModalTopBar closeModal={closeSignUpForm}/>
                                     <SignUpForm/>
                             </Modal>
-                            {/* <Modal>
-                                {
-                                    {
-                                        trigger: <span className="signInTrigger">Login</span>,
-                                        content:<SignInForm />
-                                    }
-                                }
-                            </Modal> */}
-                            {/* <Modal>
-                                {
-                                    {
-                                        trigger: <i className="fa fa-user" aria-hidden="true"></i>,
-                                        content:<SignUpForm/>
-                                    }
-                                }
-                            </Modal> */}
                             
                         </div>
                         <div className="basket">

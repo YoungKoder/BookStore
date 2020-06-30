@@ -1,0 +1,9 @@
+@import "../../../assets/variables.scss";
+.modal__topBar{
+    text-align: right;
+    padding: .6rem 1.3rem;
+    background: $modalGray;
+    & i{
+        color:$action;
+    }
+}
