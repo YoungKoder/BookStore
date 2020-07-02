@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./navbar.scss";
 import logo from "../../../assets/images/Book_Logo_svg.jpg"
 import {Link}from "react-router-dom";
@@ -7,22 +7,13 @@ import { SignInForm } from "../../auth/signInForm";
 import { SignUpForm } from "../../auth/signUpForm";
 import Modal from "react-modal";
 import { ModalTopBar } from "../modalTopBarWithCloseButton/modalTopBar";
+import { FormWrapper } from "../formWrapper/formWrapper";
 
 export const Navbar:React.FC<{}> = ()=>{
-    const customStyles = {
-        content : {
-            top                   : '50%',
-            left                  : '50%',
-            right                 : 'auto',
-            bottom                : 'auto',
-            marginRight           : '-50%',
-            transform             : 'translate(-50%, -50%)'
-          }
-    }
-
     Modal.setAppElement('#root');
-    const [modalSignInIsOpen,setIsSignInOpen] = React.useState(false);
-    const [modalSignUpIsOpen,setIsSignUpOpen] = React.useState(false);
+    const [modalSignInIsOpen,setIsSignInOpen] = useState(false);
+    const [modalSignUpIsOpen,setIsSignUpOpen] = useState(false);
+    const [modalSuccessSignUpIsOpen, setSuccessModalIsOpen] = useState(false);
 
     const openSignInModal= ()=> {
         document.body.style.position = "fixed"
@@ -39,9 +30,23 @@ export const Navbar:React.FC<{}> = ()=>{
         setIsSignUpOpen(false);
     }
 
-    const switchModal= ()=>{
+    const signInToSignUp= ()=>{
         setIsSignInOpen(false);
         setIsSignUpOpen(true);
+    }
+
+    const signUpToSignIn = ()=>{
+        setIsSignUpOpen(false);
+        setIsSignInOpen(true);
+    }
+
+    const closeSuccesModal = ()=>{
+        setSuccessModalIsOpen(false);
+    }
+    
+    const signUpToSuccesModal = ()=>{
+        setIsSignUpOpen(false);
+        setSuccessModalIsOpen(true);
     }
     
     return(
@@ -58,7 +63,7 @@ export const Navbar:React.FC<{}> = ()=>{
                                 className="Modal"
                             >
                                 <ModalTopBar closeModal={closeSignInForm}/>
-                                <SignInForm closeModal={switchModal}/>
+                                <SignInForm switchToSignUpForm={signInToSignUp}/>
                             </Modal>
                             <i onClick={openSignUpModal} className="fa fa-user" aria-hidden="true"></i>
                             <Modal
@@ -66,7 +71,32 @@ export const Navbar:React.FC<{}> = ()=>{
                                 onRequestClose={closeSignUpForm}
                                 className="Modal">
                                    <ModalTopBar closeModal={closeSignUpForm}/>
-                                    <SignUpForm/>
+                                    <SignUpForm switchToSignInForm={signUpToSignIn}
+                                    switchToSuccessForm={signUpToSuccesModal}/>
+                            </Modal>
+                            <Modal isOpen={modalSuccessSignUpIsOpen}
+                            onRequestClose={closeSuccesModal}
+                            className="Modal">
+                                <ModalTopBar closeModal={closeSuccesModal}/>
+                                <FormWrapper isAuth={false} title="Confirm Your Email Address!">
+                                   {
+                                       {
+                                           content: <div>
+                                                <p>
+                                                    Lorem ipsum dolor sit amet consectetur 
+                                                    adipisicing elit. Quos quam veritatis deleniti placeat 
+                                                    eius, omnis sunt a maiores laborum debitis labore reiciendis 
+                                                    ipsa commodi. Dolores similique minus itaque aut est.
+                                                </p> 
+                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing 
+                                                    elit. Odio saepe doloremque, quod dicta doloribus 
+                                                    asperiores a rem, repellendus eos deleniti cum ratione 
+                                                    alias perspiciatis quae aperiam nulla velit, nihil aliquam?
+                                                    </p>
+                                                </div>
+                                       }
+                                   }
+                                </FormWrapper>
                             </Modal>
                             
                         </div>

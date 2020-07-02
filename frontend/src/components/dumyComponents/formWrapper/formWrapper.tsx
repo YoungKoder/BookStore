@@ -18,9 +18,8 @@ export const FormWrapper:React.FC<OwnProps> = ({isAuth,title,children}:OwnProps)
                     <div className="userLogo" >
                         <img src={fakeUser} alt="fake logo user"></img>
                     </div>
-                    <p className="formOuter__title">{title}</p>
                 </div>}
-                  
+                <p className="formOuter__title">{title}</p>
                 {children.content}
             </div>
         </>

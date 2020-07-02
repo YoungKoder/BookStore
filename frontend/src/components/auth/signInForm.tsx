@@ -15,31 +15,8 @@ import "./authForm.scss";
 import { FormWrapper } from "../dumyComponents/formWrapper/formWrapper";
 import { Button } from "../dumyComponents/button/button";
 
-
-interface DispatchProps{
-    
-}
-
-interface StateProps{
-
-}
-type Props = StateProps & DispatchProps
-
-const SignInInnerForm = (props:OwnProps & FormikProps<SignInUserData>)=>{
-    const {touched, errors, isSubmitting, closeModal} = props;
-    const [modalIsOpen,setIsOpen] = React.useState(false);
-
-    const openModal=()=> {
-        setIsOpen(true);
-    }
-    const closeSignUpModal=()=>{
-        console.log("i am trying to close modal");
-        setIsOpen(false);
-    }
-    const switchModals= ()=> {
-        closeModal();
-        openModal();
-    }
+const SignInInnerForm = (props:SignInFormProps & FormikProps<SignInUserData>)=>{
+    const {touched, errors, isSubmitting, switchToSignUpForm} = props;
     
     return(
         <>
@@ -66,16 +43,13 @@ const SignInInnerForm = (props:OwnProps & FormikProps<SignInUserData>)=>{
                                     </Button>
                                 </div>
                                 <div className="signUpAction">
-                                    <span onClick={()=>closeModal()}>
+                                    <span onClick={()=>switchToSignUpForm()}>
                                         New to Book publishing Company?
                                     </span>
-                                    <Button type="button" onClick={()=>closeModal()} size="long" variant="outlined">
+                                    <Button type="button" onClick={()=>switchToSignUpForm()} size="long" variant="outlined">
                                         {"Sign Up"}
                                     </Button>
                                 </div>
-                                
-            
-                            
                             </Form>  
                     }
                 }
@@ -83,12 +57,12 @@ const SignInInnerForm = (props:OwnProps & FormikProps<SignInUserData>)=>{
         </>
     )
 }
-interface OwnProps{
-    closeModal: ()=>any
-}
+// interface OwnProps{
+//     closeModal: ()=>any
+// }
 
 interface SignInFormProps{
-    closeModal: ()=>void
+    switchToSignUpForm: ()=>void
 }
 export const SignInForm = withFormik<SignInFormProps,SignInUserData>({
     mapPropsToValues: (props)=>{

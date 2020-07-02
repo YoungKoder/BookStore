@@ -4,6 +4,9 @@
     padding: .6rem 1.3rem;
     background: $modalGray;
     & i{
+        &:hover{
+            cursor: pointer;
+        }
         color:$action;
     }
 }

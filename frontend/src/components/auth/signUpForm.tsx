@@ -12,8 +12,13 @@ import { FormWrapper } from "../dumyComponents/formWrapper/formWrapper";
 import { authService } from "../../services/authService";
 import { Button } from "../dumyComponents/button/button";
 
-const SignUpInnerForm = (props:FormikProps<SignUpUserData>)=>{
-    const {touched, errors, isSubmitting} = props;
+interface SignUpFormProps{
+    switchToSignInForm: ()=>void
+    switchToSuccessForm: ()=>void
+}
+
+const SignUpInnerForm = (props:SignUpFormProps& FormikProps<SignUpUserData>)=>{
+    const {touched, errors, isSubmitting, switchToSignInForm, switchToSuccessForm} = props;
     return(
         <>
             <FormWrapper isAuth = {true} title="Create Acount">
@@ -64,7 +69,7 @@ const SignUpInnerForm = (props:FormikProps<SignUpUserData>)=>{
                                     </Button>
                             </div>
 
-                            <p className="linkToSignIn">Already have an account? <span>Sign In</span></p>
+                            <p className="linkToSignIn">Already have an account? <span onClick={()=>switchToSignInForm()}>Sign In</span></p>
                         </Form>
                     
                     }
@@ -75,7 +80,7 @@ const SignUpInnerForm = (props:FormikProps<SignUpUserData>)=>{
     )
 }
 
-export const SignUpForm = withFormik<InitialValues,SignUpUserData >({
+export const SignUpForm = withFormik<SignUpFormProps,SignUpUserData >({
     mapPropsToValues: (props)=>{
         return{
             userName:'',
@@ -106,14 +111,15 @@ export const SignUpForm = withFormik<InitialValues,SignUpUserData >({
             .oneOf([yup.ref('password')], 'Password must match')
     }),
 
-    handleSubmit:(values,{setSubmitting})=>{
+    handleSubmit:(values,{props,setSubmitting})=>{
         console.log(`Values from inputs ${values}`);
         try{
             authService.signUpUser(values);
+            props.switchToSuccessForm();
             setSubmitting(false);
+            
         }catch{
             console.log("can't signUp");
         }
-        
     }
 })(SignUpInnerForm);
