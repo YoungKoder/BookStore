@@ -29,7 +29,6 @@ export class AuthController implements Controller{
 
     private registration = async(req:express.Request,res:express.Response, next:express.NextFunction)=>{
         const userData:User = req.body;
-        console.log(`<<< userData from request: ${userData}`);
         this.user = userData;
         let userEntity = await addUser(userData);
         if(!userEntity){

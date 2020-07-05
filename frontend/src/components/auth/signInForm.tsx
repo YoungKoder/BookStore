@@ -14,10 +14,13 @@ import { authService } from "../../services/authService";
 import "./authForm.scss";
 import { FormWrapper } from "../dumyComponents/formWrapper/formWrapper";
 import { Button } from "../dumyComponents/button/button";
+import { useDispatch } from "react-redux";
+import { modalOpen } from "../../actions/modalsActions/modal.action";
+import SignUpForm  from "./signUpForm";
 
 const SignInInnerForm = (props:SignInFormProps & FormikProps<SignInUserData>)=>{
-    const {touched, errors, isSubmitting, switchToSignUpForm} = props;
-    
+    const {touched, errors, isSubmitting} = props;
+    const dispatch = useDispatch();
     return(
         <>
             <FormWrapper isAuth = {true} title="Sign-In">
@@ -43,10 +46,14 @@ const SignInInnerForm = (props:SignInFormProps & FormikProps<SignInUserData>)=>{
                                     </Button>
                                 </div>
                                 <div className="signUpAction">
-                                    <span onClick={()=>switchToSignUpForm()}>
+                                    <span onClick={()=>dispatch(modalOpen({
+                                        content:<SignUpForm/>
+                                    }))}>
                                         New to Book publishing Company?
                                     </span>
-                                    <Button type="button" onClick={()=>switchToSignUpForm()} size="long" variant="outlined">
+                                    <Button type="button" onClick={()=>dispatch(modalOpen({
+                                        content:<SignUpForm/>
+                                    }))} size="long" variant="outlined">
                                         {"Sign Up"}
                                     </Button>
                                 </div>
@@ -62,7 +69,7 @@ const SignInInnerForm = (props:SignInFormProps & FormikProps<SignInUserData>)=>{
 // }
 
 interface SignInFormProps{
-    switchToSignUpForm: ()=>void
+    // switchToSignUpForm: ()=>void
 }
 export const SignInForm = withFormik<SignInFormProps,SignInUserData>({
     mapPropsToValues: (props)=>{

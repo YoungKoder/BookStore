@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Dispatch } from "react";
 import {
     FormikProps,
     Form,
@@ -11,14 +11,20 @@ import { SignUpUserData, InitialValues } from "../../types/SignUpUserData";
 import { FormWrapper } from "../dumyComponents/formWrapper/formWrapper";
 import { authService } from "../../services/authService";
 import { Button } from "../dumyComponents/button/button";
+import { modalOpen, closeModal } from "../../actions/modalsActions/modal.action";
+import { SignInForm } from "./signInForm";
+import { useDispatch } from "react-redux";
+import { switchModal } from "../../tools/switchModalFunction";
+import { ConfirmEmail } from "../dumyComponents/confirmEmailForm/confirmEmailForm";
+import { connect } from "react-redux";
 
 interface SignUpFormProps{
-    switchToSignInForm: ()=>void
-    switchToSuccessForm: ()=>void
+    switchModal:(obj:Object)=>void
 }
 
 const SignUpInnerForm = (props:SignUpFormProps& FormikProps<SignUpUserData>)=>{
-    const {touched, errors, isSubmitting, switchToSignInForm, switchToSuccessForm} = props;
+    const {touched, errors, isSubmitting} = props;
+    const dispatch = useDispatch();
     return(
         <>
             <FormWrapper isAuth = {true} title="Create Acount">
@@ -64,23 +70,24 @@ const SignUpInnerForm = (props:SignUpFormProps& FormikProps<SignUpUserData>)=>{
                             
                             <div className="actionWrapper">
                                     <div></div>
-                                    <Button type="submit" onClick={():void=>console.log("you click Sign-Up")} disabled={isSubmitting}>
+                                    <Button type="submit" onClick={()=>console.log()} disabled={isSubmitting}>
                                         {"Sign Up Your Account"}
                                     </Button>
                             </div>
 
-                            <p className="linkToSignIn">Already have an account? <span onClick={()=>switchToSignInForm()}>Sign In</span></p>
+                            <p className="linkToSignIn">Already have an account? <span onClick={()=>switchModal(dispatch,{
+                                content:<SignInForm/>
+                            })}>Sign In</span></p>
                         </Form>
                     
                     }
                 }
-                
             </FormWrapper>
         </>
     )
 }
 
-export const SignUpForm = withFormik<SignUpFormProps,SignUpUserData >({
+const SignUpForm = withFormik<SignUpFormProps,SignUpUserData>({
     mapPropsToValues: (props)=>{
         return{
             userName:'',
@@ -112,10 +119,11 @@ export const SignUpForm = withFormik<SignUpFormProps,SignUpUserData >({
     }),
 
     handleSubmit:(values,{props,setSubmitting})=>{
+       
         console.log(`Values from inputs ${values}`);
         try{
             authService.signUpUser(values);
-            props.switchToSuccessForm();
+            props.switchModal({content:<ConfirmEmail/>})
             setSubmitting(false);
             
         }catch{
@@ -123,3 +131,13 @@ export const SignUpForm = withFormik<SignUpFormProps,SignUpUserData >({
         }
     }
 })(SignUpInnerForm);
+
+const mapDispatchToProps = (dispatch:Dispatch<{}>):SignUpFormProps=>{
+    return{
+        switchModal: (obj:Object)=>{
+            dispatch(closeModal())
+            dispatch(modalOpen(obj))
+        }
+    }
+}
+export  default connect<SignUpFormProps,any,any>(null,mapDispatchToProps)(SignUpForm)

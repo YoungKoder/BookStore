@@ -1,6 +1,7 @@
 import { printingEditionConstants } from "./constants/printindEditions.constants";
 import { PrintingEdition } from "../printingEdition";
 import { EditionCurrency, PriceFilter, EditionType } from "../enums";
+import { ReactComponentElement } from "react";
 
 export interface PrintingEditionsLoadedAction{
     type: "PRS_LOADED",
@@ -39,6 +40,17 @@ export interface ChangePage{
     type:"CHANGE_PAGE",
     currentPrintingEditions:PrintingEdition[]
 }
+
+export interface CloseModal{
+    type:"CLOSE_MODAL",
+    modal:any
+}
+export interface OpenModal{
+    type:"OPEN_MODAL",
+    modal:any
+}
+
+export type ModalActionTypes = CloseModal | OpenModal;
 
 export type PrintingEditionsActionTypes = PrintingEditionsLoadedAction | 
 PrintingEditionsFetchingAction |PrintingEditionsErrorAction | 
