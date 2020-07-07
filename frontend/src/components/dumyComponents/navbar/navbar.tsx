@@ -2,14 +2,8 @@ import React, { useState } from "react";
 import "./navbar.scss";
 import logo from "../../../assets/images/Book_Logo_svg.jpg"
 import {Link}from "react-router-dom";
-// import { Modal } from "../modalWindow/modalWindow";
 import { SignInForm } from "../../auth/signInForm";
 import  SignUpForm  from "../../auth/signUpForm";
-import Modal from "react-modal";
-import { ModalTopBar } from "../modalTopBarWithCloseButton/modalTopBar";
-import { FormWrapper } from "../formWrapper/formWrapper";
-import  ModalController  from "../../modalController/modalController";
-import store from "../../../store";
 import { useDispatch } from "react-redux";
 import { modalOpen } from "../../../actions/modalsActions/modal.action";
 

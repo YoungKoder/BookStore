@@ -21,8 +21,8 @@ export class AuthController implements Controller{
 
     private initializeRoutes(){
         this.router.post(`${this.path}/register`, this.registration);
-        this.router.get(`${this.path}/register`, this.sendConfirmMessage);
-        this.router.get(`${this.path}/register/confirmEmail`, this.confirmRegistration);
+        // this.router.get(`${this.path}/register`, this.sendConfirmMessage);
+        // this.router.get(`${this.path}/register/confirmEmail`, this.confirmRegistration);
         this.router.post(`${this.path}/loginIn`, this.loginIn);
         this.router.post(`${this.path}/logout`, this.loggingOut);
     }
@@ -37,7 +37,7 @@ export class AuthController implements Controller{
         }
         sendMail(userData);
 
-        res.redirect(`${this.path}/register`);
+        // res.redirect(`${this.path}/register`);
         res.send({user:userEntity});
     }
 
@@ -57,11 +57,11 @@ export class AuthController implements Controller{
         res.setHeader('Authorization', ['Bearer ']);
         res.sendStatus(200);
     }
-    private sendConfirmMessage = (req:express.Request, res:express.Response)=>{
-        res.send(`SignUp was successfull, email with confirmation was send to ${this.user.email}`);
-    }
-    private confirmRegistration = (req:express.Request, res:express.Response)=>{
-        res.send("You successfully confirm registartion");
-    }
+    // private sendConfirmMessage = (req:express.Request, res:express.Response)=>{
+    //     res.send(`SignUp was successfull, email with confirmation was send to ${this.user.email}`);
+    // }
+    // private confirmRegistration = (req:express.Request, res:express.Response)=>{
+    //     res.send("You successfully confirm registartion");
+    // }
 
 }

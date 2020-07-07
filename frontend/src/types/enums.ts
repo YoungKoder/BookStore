@@ -15,3 +15,8 @@ export enum PriceFilter{
     LowToHight = "Price: Low To Hight",
     HightToLow = "Price: Hight To Low"
 }
+
+export enum UserRole{
+    admin = 0,
+    user = 1
+}

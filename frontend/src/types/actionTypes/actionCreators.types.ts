@@ -2,6 +2,7 @@ import { printingEditionConstants } from "./constants/printindEditions.constants
 import { PrintingEdition } from "../printingEdition";
 import { EditionCurrency, PriceFilter, EditionType } from "../enums";
 import { ReactComponentElement } from "react";
+import { User } from "../user";
 
 export interface PrintingEditionsLoadedAction{
     type: "PRS_LOADED",
@@ -50,7 +51,20 @@ export interface OpenModal{
     modal:any
 }
 
+export interface RegisterUser{
+    type:"SIGN_UP",
+    user:User
+}
+export interface SignInUser{
+    type:"SIGN_IN",
+    isAuth:boolean
+}
+export interface LogOutUser{
+    type:"LOG_OUT"
+}
+
 export type ModalActionTypes = CloseModal | OpenModal;
+export type UserActionTypes = RegisterUser | SignInUser |LogOutUser;
 
 export type PrintingEditionsActionTypes = PrintingEditionsLoadedAction | 
 PrintingEditionsFetchingAction |PrintingEditionsErrorAction | 

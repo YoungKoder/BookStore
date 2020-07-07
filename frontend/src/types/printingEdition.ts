@@ -1,6 +1,6 @@
 import { EditionCurrency, EditionType } from "./enums";
 
-interface Author{
+export interface Author{
     _id:string,
     name:string
 }

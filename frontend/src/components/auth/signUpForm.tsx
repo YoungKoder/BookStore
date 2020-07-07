@@ -17,9 +17,13 @@ import { useDispatch } from "react-redux";
 import { switchModal } from "../../tools/switchModalFunction";
 import { ConfirmEmail } from "../dumyComponents/confirmEmailForm/confirmEmailForm";
 import { connect } from "react-redux";
+import { User } from "../../types/user";
+import { signUpUser } from "../../actions/userActions/userAction";
+import store from "../../store";
 
 interface SignUpFormProps{
-    switchModal:(obj:Object)=>void
+    switchModal:(obj:Object)=>void,
+    signUpUser:(obj:User)=>void
 }
 
 const SignUpInnerForm = (props:SignUpFormProps& FormikProps<SignUpUserData>)=>{
@@ -118,12 +122,26 @@ const SignUpForm = withFormik<SignUpFormProps,SignUpUserData>({
             .oneOf([yup.ref('password')], 'Password must match')
     }),
 
-    handleSubmit:(values,{props,setSubmitting})=>{
+    handleSubmit: async (values,{props,setSubmitting})=>{
        
         console.log(`Values from inputs ${values}`);
+        const saveState = (state:any)=>{
+            try{
+                const serializedStore = JSON.stringify(state);
+                window.localStorage.setItem('app_state', serializedStore);
+            }catch(e){
+
+            }
+        }
         try{
-            authService.signUpUser(values);
+            const user = await authService.signUpUser(values);
+            console.log(`user after service ${user.first_name}`);
+            store.subscribe(()=>{
+                saveState(store.getState())
+            })
             props.switchModal({content:<ConfirmEmail/>})
+            props.signUpUser(user);
+            
             setSubmitting(false);
             
         }catch{
@@ -134,9 +152,12 @@ const SignUpForm = withFormik<SignUpFormProps,SignUpUserData>({
 
 const mapDispatchToProps = (dispatch:Dispatch<{}>):SignUpFormProps=>{
     return{
-        switchModal: (obj:Object)=>{
+        switchModal: (modal:Object)=>{
             dispatch(closeModal())
-            dispatch(modalOpen(obj))
+            dispatch(modalOpen(modal))
+        },
+        signUpUser:(user:User)=>{
+            dispatch(signUpUser(user))
         }
     }
 }

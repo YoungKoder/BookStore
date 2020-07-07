@@ -1,4 +1,4 @@
-import { ModalsState } from "../types/Modals";
+import { ModalsState } from "../types/stateTypes/Modals";
 import { ModalActionTypes } from "../types/actionTypes/actionCreators.types";
 
 const modals:ModalsState = {

@@ -7,6 +7,7 @@ import { Header } from '../dumyComponents/header/header';
 import { EditionCardInfo } from '../printingEditionCardInfo/editionCardInfo';
 import ModalController from "../modalController/modalController";
 import store from '../../store';
+import SuccesConfirmEmail from '../confirmEmailSucces/confirmEmailSuccess';
 
 const App =()=>{
     return(
@@ -17,9 +18,11 @@ const App =()=>{
                         <Route path="/" component={Navbar}/>
                         <Route path="/" component={Header}/>
                         <Route exact path="/"  component={HomePage} />
-                        <Route  path="/:id" render={({match})=>{
+                        <Route exact path="/confirmEmailSuccess" component={SuccesConfirmEmail}/>
+                        <Route  exact path="/:id" render={({match})=>{
                             const{id} = match.params;
-                            return <EditionCardInfo matchedId = {id}/>
+                            if(id!=="confirmEmailSuccess")
+                                return <EditionCardInfo matchedId = {id}/>
                         }}/>
                     </Router>
                     <ModalController/>

@@ -5,7 +5,7 @@ import fakeUser from "../../../assets/images/User.png";
 
 interface OwnProps{
     isAuth:boolean;
-    title:String;
+    title:String|ReactNode;
     children:{
         content:ReactNode
     }

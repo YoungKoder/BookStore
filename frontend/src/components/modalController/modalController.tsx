@@ -1,5 +1,5 @@
 import React, { ReactElement, useEffect } from "react";
-import { ModalsState } from "../../types/Modals";
+import { ModalsState } from "../../types/stateTypes/Modals";
 import { ModalTopBar } from "../dumyComponents/modalTopBarWithCloseButton/modalTopBar";
 import Modal from "react-modal"
 import { SignInForm } from "../auth/signInForm";
@@ -22,12 +22,6 @@ interface StateProps{
 type Props = StateProps & DispatchProps;
 const ModalController:React.SFC<Props> = (props:Props)=>{
     Modal.setAppElement("#root");
-
-    // const {title,id,content} = props.item;
-
-    // useEffect(()=>{
-    //     props.openModal(props.item)
-    // },[])
     
     return(
         <>
