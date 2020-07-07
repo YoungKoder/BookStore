@@ -19,7 +19,7 @@ export const FormWrapper:React.FC<OwnProps> = ({isAuth,title,children}:OwnProps)
                         <img src={fakeUser} alt="fake logo user"></img>
                     </div>
                 </div>}
-                <p className="formOuter__title">{title}</p>
+                <p className="formOuter__title" style={{textAlign:"center"}}>{title}</p>
                 {children.content}
             </div>
         </>

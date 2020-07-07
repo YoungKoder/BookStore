@@ -9,7 +9,9 @@ import PrintingEditionList  from '../printingEditionList/printingEditionList';
 import store, { RootState } from "../../store";
 import { User } from "../../types/user";
 import { UserState } from "../../types/stateTypes/userState";
+import { Button } from "../dumyComponents/button/button";
 
+import "./confirmEmailSuccess.scss";
 interface OwnProps{
 
 }
@@ -44,7 +46,14 @@ const SuccesConfirmEmail:React.SFC<Props> = (props:Props)=>{
                     <FormWrapper isAuth={false} title={<i className="fa fa-check" aria-hidden="true"></i>}>
                         {
                             {
-                                content: <p>Dear new {props.user.first_name} {props.user.last_name} , thank you for your registration</p>
+                                content: <div className="confirmEmailSuccess" >
+                                    <div className="confirmEmailSuccess_text">
+                                        <p>Dear new {props.user.first_name} {props.user.last_name},</p> 
+                                        <p>thank you for your registration</p>
+                                    </div>
+                                        
+                                        <Button type={""} onClick={closeModal} size={"long"} >  {"Continue"}</Button>
+                                    </div>
                             }
                         }
                     </FormWrapper>
