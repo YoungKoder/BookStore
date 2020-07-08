@@ -57,6 +57,7 @@ export interface RegisterUser{
 }
 export interface SignInUser{
     type:"SIGN_IN",
+    user:User,
     isAuth:boolean
 }
 export interface LogOutUser{

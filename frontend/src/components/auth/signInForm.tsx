@@ -1,4 +1,4 @@
-import React, { Children } from "react";
+import React, { Dispatch } from "react";
 
 import {
     FormikProps,
@@ -14,9 +14,12 @@ import { authService } from "../../services/authService";
 import "./authForm.scss";
 import { FormWrapper } from "../dumyComponents/formWrapper/formWrapper";
 import { Button } from "../dumyComponents/button/button";
-import { useDispatch } from "react-redux";
+import { useDispatch, connect } from "react-redux";
 import { modalOpen } from "../../actions/modalsActions/modal.action";
 import SignUpForm  from "./signUpForm";
+import { User } from "../../types/user";
+import { signInUser } from "../../actions/userActions/userAction";
+import store from "../../store";
 
 const SignInInnerForm = (props:SignInFormProps & FormikProps<SignInUserData>)=>{
     const {touched, errors, isSubmitting} = props;
@@ -34,8 +37,9 @@ const SignInInnerForm = (props:SignInFormProps & FormikProps<SignInUserData>)=>{
                                     {touched.email && errors.email && <span className="errorMessage">{errors.email}</span>}
                                 </div>
                                 <label htmlFor="password">Password</label>
-                                <div className="fieldWrapper">
-                                    <Field id="password" type="password" name = "password" placeholder="Password"/>
+                                <div className="fieldWrapper passwordField">
+                                    <span className="passwordField_forgotPass" onClick={()=>console.log()}>Forgot your password?</span>
+                                    <Field id="password" className="" type="password" name = "password" placeholder="Password"/>
                                     {touched.password && errors.password && <span className="errorMessage">{errors.password}</span>}
                                 </div>
 
@@ -64,14 +68,11 @@ const SignInInnerForm = (props:SignInFormProps & FormikProps<SignInUserData>)=>{
         </>
     )
 }
-// interface OwnProps{
-//     closeModal: ()=>any
-// }
 
 interface SignInFormProps{
-    // switchToSignUpForm: ()=>void
+    signInUser: (user:User, isAuth:boolean)=>void
 }
-export const SignInForm = withFormik<SignInFormProps,SignInUserData>({
+const SignInForm = withFormik<SignInFormProps,SignInUserData>({
     mapPropsToValues: (props)=>{
         return{
             email:'',
@@ -87,10 +88,12 @@ export const SignInForm = withFormik<SignInFormProps,SignInUserData>({
             .required('Password is required')
     }),
 
-    handleSubmit:(values:SignInUserData,{setSubmitting})=>{
+    handleSubmit:async (values:SignInUserData,{props,setSubmitting})=>{
         console.log(`Values from inputs${values}`);
+        
         try{
-            authService.signInUser(values);
+            const user = await authService.signInUser(values);
+            props.signInUser(user, true)
             setSubmitting(false);
         }
         catch(error){
@@ -98,3 +101,13 @@ export const SignInForm = withFormik<SignInFormProps,SignInUserData>({
         };
     }
 })(SignInInnerForm);
+
+const mapDispatchToProps = (dispatch:Dispatch<{}>):SignInFormProps=>{
+    return{
+        signInUser:(user:User, isAuth:boolean)=>{
+            dispatch(signInUser(user, isAuth))
+        }
+    }
+}
+
+export default connect<SignInFormProps,any,any>(null,mapDispatchToProps)(SignInForm);

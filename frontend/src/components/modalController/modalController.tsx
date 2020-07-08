@@ -2,7 +2,7 @@ import React, { ReactElement, useEffect } from "react";
 import { ModalsState } from "../../types/stateTypes/Modals";
 import { ModalTopBar } from "../dumyComponents/modalTopBarWithCloseButton/modalTopBar";
 import Modal from "react-modal"
-import { SignInForm } from "../auth/signInForm";
+import  SignInForm from "../auth/signInForm";
 import { RootState } from "../../store";
 import { closeModal, modalOpen } from "../../actions/modalsActions/modal.action";
 import { connect } from "react-redux";

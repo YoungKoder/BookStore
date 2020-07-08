@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./navbar.scss";
 import logo from "../../../assets/images/Book_Logo_svg.jpg"
 import {Link}from "react-router-dom";
-import { SignInForm } from "../../auth/signInForm";
+import SignInForm  from "../../auth/signInForm";
 import  SignUpForm  from "../../auth/signUpForm";
 import { useDispatch } from "react-redux";
 import { modalOpen } from "../../../actions/modalsActions/modal.action";

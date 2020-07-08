@@ -52,3 +52,16 @@
         font-weight:600;
     }
 }
+.passwordField{
+    position: relative;
+    &_forgotPass{
+        position:absolute;
+        right:0;
+        bottom:110%;
+        font-size: .9rem;
+        color:$gray;
+        &:hover{
+            cursor:pointer;
+        }
+    }
+}

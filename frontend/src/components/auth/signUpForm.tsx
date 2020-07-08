@@ -12,7 +12,7 @@ import { FormWrapper } from "../dumyComponents/formWrapper/formWrapper";
 import { authService } from "../../services/authService";
 import { Button } from "../dumyComponents/button/button";
 import { modalOpen, closeModal } from "../../actions/modalsActions/modal.action";
-import { SignInForm } from "./signInForm";
+import  SignInForm  from "./signInForm";
 import { useDispatch } from "react-redux";
 import { switchModal } from "../../tools/switchModalFunction";
 import { ConfirmEmail } from "../dumyComponents/confirmEmailForm/confirmEmailForm";
@@ -124,21 +124,10 @@ const SignUpForm = withFormik<SignUpFormProps,SignUpUserData>({
 
     handleSubmit: async (values,{props,setSubmitting})=>{
        
-        console.log(`Values from inputs ${values}`);
-        const saveState = (state:any)=>{
-            try{
-                const serializedStore = JSON.stringify(state);
-                window.localStorage.setItem('app_state', serializedStore);
-            }catch(e){
-
-            }
-        }
         try{
             const user = await authService.signUpUser(values);
             console.log(`user after service ${user.first_name}`);
-            store.subscribe(()=>{
-                saveState(store.getState())
-            })
+            
             props.switchModal({content:<ConfirmEmail/>})
             props.signUpUser(user);
             

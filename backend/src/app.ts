@@ -7,6 +7,11 @@ import { expressLogger } from "./utils/logger.utils";
 import cors from "cors";
 
 export default class App{
+
+    private corsOptions = {
+        exposedHeaders:'Authorization'
+    }
+
     public app:express.Application;
     public port: string;
     
@@ -24,7 +29,7 @@ export default class App{
         this.app.use(bodyParser.json());
         this.app.use(cookieParser());
         this.app.use(expressLogger);
-        this.app.use(cors());
+        this.app.use(cors(this.corsOptions));
     }
 
     private initializeErrorHandling(){

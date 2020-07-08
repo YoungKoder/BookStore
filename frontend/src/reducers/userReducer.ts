@@ -29,6 +29,13 @@ const reduce = (state:UserState = userState, action:UserActionTypes): UserState 
         case 'SIGN_IN':
             return{
                 ...state,
+                user:{
+                    email:action.user.email,
+                    userName:action.user.userName,
+                    first_name:action.user.first_name,
+                    last_name:action.user.last_name,
+                    role:action.user.role
+                },
                 isAuth:action.isAuth
             }
         case 'LOG_OUT':

@@ -1,7 +1,7 @@
 import * as express from 'express';
 import { Controller } from '../../shared/interfaces/controller.interface';
 import userModel from "../../dataAccess/entityModels/user.model";
-import {addUser, logInUser} from "../../shared/services/auth.service";
+import {addUser, logInUser, recoverPassword} from "../../shared/services/auth.service";
 import { User } from '../../shared/interfaces/entityInnerfaces/user.interface';
 import {UserWithThisEmailAlreadyExist} from "../../shared/exeptions/UserExist.exeption";
 import { WrongCredentialsException } from '../../shared/exeptions/WrongCredentials.exeption';
@@ -21,8 +21,7 @@ export class AuthController implements Controller{
 
     private initializeRoutes(){
         this.router.post(`${this.path}/register`, this.registration);
-        // this.router.get(`${this.path}/register`, this.sendConfirmMessage);
-        // this.router.get(`${this.path}/register/confirmEmail`, this.confirmRegistration);
+        this.router.post(`${this.path}/forgotpassword`, this.forgotPassword);
         this.router.post(`${this.path}/loginIn`, this.loginIn);
         this.router.post(`${this.path}/logout`, this.loggingOut);
     }
@@ -57,11 +56,15 @@ export class AuthController implements Controller{
         res.setHeader('Authorization', ['Bearer ']);
         res.sendStatus(200);
     }
-    // private sendConfirmMessage = (req:express.Request, res:express.Response)=>{
-    //     res.send(`SignUp was successfull, email with confirmation was send to ${this.user.email}`);
-    // }
-    // private confirmRegistration = (req:express.Request, res:express.Response)=>{
-    //     res.send("You successfully confirm registartion");
-    // }
 
+    private forgotPassword = async (req:express.Request, res:express.Response, next:express.NextFunction)=>{
+        const userEmail:String = req.body;
+        const newUserEntityPass:String = await recoverPassword(userEmail);
+        if(!newUserEntityPass){
+            next(new WrongCredentialsException());
+            return;
+        }
+        sendMail(null,newUserEntityPass);
+        res.sendStatus(200);
+    }
 }

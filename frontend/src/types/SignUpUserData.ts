@@ -10,6 +10,9 @@ export interface SignInUserData{
     email:string,
     password:string
 }
+export interface RecoverPasswordData{
+    email:string
+}
 export interface InitialValues{
 
 }

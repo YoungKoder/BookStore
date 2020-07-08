@@ -27,12 +27,29 @@ const signUpUser = async(userData:SignUpUserData):Promise<User>=>{
 }
 const signInUser = async(userData:SignInUserData)=>{
     const {password, email} = userData;
-    const userEntity = {
+    const userRequest = {
         email,
         password_hash:password
     }
     try {
-        await axios.post(`http://localhost:8082/auth/loginIn`, userEntity);
+        const response = await axios.post(`http://localhost:8082/auth/loginIn`, userRequest);
+        const{email,userName,first_name,last_name,role} = response.data.user;
+        const token = response.headers['authorization'];
+        const userFromResponse:User = {
+            email,
+            userName,
+            first_name,
+            last_name,
+            role
+        }
+        // const responseWithUserAndToken = {
+        //     userFromResponse,
+        //     token
+        // }
+
+        window.localStorage.setItem('token:', token);
+        return userFromResponse;
+
     } catch (error) {
     throw new Error(`Can't sign In ${error}`);
     }

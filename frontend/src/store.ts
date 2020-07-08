@@ -6,6 +6,7 @@ import thunk from 'redux-thunk';
 import { PrintingEditionsState } from './types/stateTypes/printingEditionStateTypes';
 import { ModalsState } from './types/stateTypes/Modals';
 import { UserState } from './types/stateTypes/userState';
+import { savingStoreToLocalStorage } from './tools/savingStoreToLs';
 
 
 
@@ -16,7 +17,7 @@ export interface RootState{
 }
 const loadState = ()=>{
     try{
-        const serializedState = window.localStorage.getItem('app_state');
+        const serializedState = window.localStorage.getItem('user_state');
         if(!serializedState)return undefined;
 
         return JSON.parse(serializedState);
@@ -24,25 +25,21 @@ const loadState = ()=>{
         return undefined;
     }
 }
+
 const oldState = loadState();
-
-const saveState = (state:any)=>{
-    try{
-        const serializedStore = JSON.stringify(state);
-        window.localStorage.setItem('app_state', serializedStore);
-    }catch(e){
-
-    }
-}
-
-const store =  createStore(combineReducers<RootState>({
+const store = oldState?   createStore(combineReducers<RootState>({
     printingEdition:printingEdition, 
     modal:modal,
     user:user
-}),oldState, applyMiddleware(thunk))
+}),oldState, applyMiddleware(thunk)):createStore(combineReducers<RootState>({
+    printingEdition:printingEdition, 
+    modal:modal,
+    user:user
+}), applyMiddleware(thunk))
 
 store.subscribe(()=>{
-    saveState(store.getState())
+    savingStoreToLocalStorage(store.getState())
 })
+
 
 export default store;

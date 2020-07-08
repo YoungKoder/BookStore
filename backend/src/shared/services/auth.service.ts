@@ -5,6 +5,7 @@ import { TokenData } from "../interfaces/token.interface";
 import { createToken } from "./token.service";
 import { createUser } from "../repositories/auth.repositoriy";
 import { sendMail } from "../../utils/nodemailer.utils";
+import { randomBytes } from "crypto";
 
 export const addUser = async(user:User):Promise<User>=>{
     const userData = user;
@@ -27,4 +28,13 @@ export const logInUser = async (user:User): Promise<User> =>{
         }
     }
     return ;
+}
+
+export const recoverPassword = async (email:String):Promise<String>=>{
+    const User = await userModel.findOne({email:email});
+    if(User){
+        const randomPass = randomBytes(20).toString('hex');
+        User.password_hash = await bcrypt.hash(randomPass,10);
+        return randomPass
+    }return;
 }
