@@ -63,9 +63,13 @@ export interface SignInUser{
 export interface LogOutUser{
     type:"LOG_OUT"
 }
+export interface ConfirmEmailPasswordAssistance{
+    type:"CONFIRM_EMAIL",
+    confirmEmail:boolean
+}
 
 export type ModalActionTypes = CloseModal | OpenModal;
-export type UserActionTypes = RegisterUser | SignInUser |LogOutUser;
+export type UserActionTypes = RegisterUser | SignInUser |LogOutUser |ConfirmEmailPasswordAssistance;
 
 export type PrintingEditionsActionTypes = PrintingEditionsLoadedAction | 
 PrintingEditionsFetchingAction |PrintingEditionsErrorAction | 

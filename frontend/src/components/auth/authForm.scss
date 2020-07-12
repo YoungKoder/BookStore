@@ -65,3 +65,29 @@
         }
     }
 }
+.passwordAssistance{
+    &_errorMessage{
+        background:$modalGray;
+        padding: 1rem;
+        border: 1px solid #FD3317;
+        &__title{
+            color:#FD3317;
+            font-family: $text;
+            font-size: 1.2rem;
+        }
+        &__text{
+            font-family: $text;
+            font-size: .8rem;
+            color:#FFF;
+        }
+    }
+    &_content{
+        &>p{
+            margin: 1rem 0;
+        }
+    }
+    &_confirmEmailBtn{
+        margin-top: 2rem;
+        text-align: right;
+    }
+}

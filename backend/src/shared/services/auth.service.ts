@@ -31,10 +31,12 @@ export const logInUser = async (user:User): Promise<User> =>{
 }
 
 export const recoverPassword = async (email:String):Promise<String>=>{
-    const User = await userModel.findOne({email:email});
-    if(User){
+    try{
+        const User = await userModel.findOne({email:email});
         const randomPass = randomBytes(20).toString('hex');
         User.password_hash = await bcrypt.hash(randomPass,10);
         return randomPass
-    }return;
+    }catch(e){
+        return 
+    }
 }

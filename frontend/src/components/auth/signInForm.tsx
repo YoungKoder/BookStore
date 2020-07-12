@@ -20,6 +20,7 @@ import SignUpForm  from "./signUpForm";
 import { User } from "../../types/user";
 import { signInUser } from "../../actions/userActions/userAction";
 import store from "../../store";
+import  ForgotPasswordForm  from "./forgotPassword";
 
 const SignInInnerForm = (props:SignInFormProps & FormikProps<SignInUserData>)=>{
     const {touched, errors, isSubmitting} = props;
@@ -38,7 +39,9 @@ const SignInInnerForm = (props:SignInFormProps & FormikProps<SignInUserData>)=>{
                                 </div>
                                 <label htmlFor="password">Password</label>
                                 <div className="fieldWrapper passwordField">
-                                    <span className="passwordField_forgotPass" onClick={()=>console.log()}>Forgot your password?</span>
+                                    <span className="passwordField_forgotPass" onClick={()=>dispatch(modalOpen({
+                                        content:<ForgotPasswordForm/>
+                                    }))}>Forgot your password?</span>
                                     <Field id="password" className="" type="password" name = "password" placeholder="Password"/>
                                     {touched.password && errors.password && <span className="errorMessage">{errors.password}</span>}
                                 </div>

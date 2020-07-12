@@ -15,6 +15,7 @@ export interface RootState{
     modal:ModalsState,
     user:UserState
 }
+
 const loadState = ()=>{
     try{
         const serializedState = window.localStorage.getItem('user_state');
@@ -27,7 +28,7 @@ const loadState = ()=>{
 }
 
 const oldState = loadState();
-const store = oldState?   createStore(combineReducers<RootState>({
+const store = oldState?  createStore(combineReducers<RootState>({
     printingEdition:printingEdition, 
     modal:modal,
     user:user

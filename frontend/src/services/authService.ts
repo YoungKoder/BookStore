@@ -42,21 +42,28 @@ const signInUser = async(userData:SignInUserData)=>{
             last_name,
             role
         }
-        // const responseWithUserAndToken = {
-        //     userFromResponse,
-        //     token
-        // }
 
         window.localStorage.setItem('token:', token);
         return userFromResponse;
 
     } catch (error) {
-    throw new Error(`Can't sign In ${error}`);
+        throw new Error(`Can't sign In ${error}`);
     }
-    
 }
 
+const passwordAssistance = async (email:String):Promise<number| undefined> =>{
+    console.log("i am trying to call post request");
+    try{
+        const response = await axios.post(`http://localhost:8082/auth/forgotpassword`,email );
+        console.log(`status response ${response.status}`)
+        return response.status; 
+    }catch(e){
+        return ;
+        // throw new Error(`You entered wrong email ${e}`);
+    }
+}
 export const authService = {
     signUpUser,
-    signInUser
+    signInUser,
+    passwordAssistance
 }

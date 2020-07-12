@@ -35,8 +35,6 @@ export class AuthController implements Controller{
             return;
         }
         sendMail(userData);
-
-        // res.redirect(`${this.path}/register`);
         res.send({user:userEntity});
     }
 

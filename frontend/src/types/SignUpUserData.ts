@@ -11,7 +11,7 @@ export interface SignInUserData{
     password:string
 }
 export interface RecoverPasswordData{
-    email:string
+    emailPasswordAssistance:string
 }
 export interface InitialValues{
 

@@ -1,11 +1,7 @@
 import React from"react";
 import { FormWrapper } from "../formWrapper/formWrapper";
-import { useDispatch } from "react-redux";
-import { modalOpen } from "../../../actions/modalsActions/modal.action";
-import SuccesConfirmEmail from "../../confirmEmailSucces/confirmEmailSuccess";
 
 export const ConfirmEmail:React.SFC<{}>=()=>{
-    const dispatch = useDispatch();
     return(
         <FormWrapper isAuth={false} title="Confirm your email">
             {

@@ -1,5 +1,5 @@
 import { User } from "../../types/user";
-import { RegisterUser, SignInUser } from "../../types/actionTypes/actionCreators.types";
+import { RegisterUser, SignInUser, ConfirmEmailPasswordAssistance } from "../../types/actionTypes/actionCreators.types";
 
 export const signUpUser = (user:User):RegisterUser=>{
     return{
@@ -13,5 +13,12 @@ export const signInUser = (user:User, isAuth:boolean):SignInUser=>{
         type:"SIGN_IN",
         user,
         isAuth
+    }
+}
+
+export const confirmEmail = (confirm:boolean):ConfirmEmailPasswordAssistance=>{
+    return{
+        type:"CONFIRM_EMAIL",
+        confirmEmail:confirm
     }
 }

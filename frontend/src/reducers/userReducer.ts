@@ -1,6 +1,7 @@
 import { User } from "../types/user";
 import { UserState } from "../types/stateTypes/userState";
 import { UserActionTypes } from "../types/actionTypes/actionCreators.types";
+import { boolean } from "yup";
 
 const userState:UserState={
     user:{
@@ -10,7 +11,8 @@ const userState:UserState={
         last_name:"",
         role:1
     },
-    isAuth:false
+    isAuth:false,
+    confirmedEmail:false
 }
 
 const reduce = (state:UserState = userState, action:UserActionTypes): UserState => {
@@ -49,6 +51,11 @@ const reduce = (state:UserState = userState, action:UserActionTypes): UserState 
                     role:1
                 },
                 isAuth:false
+            }
+        case 'CONFIRM_EMAIL':
+            return{
+                ...state,
+                confirmedEmail:action.confirmEmail
             }
         default: 
             return state;
