@@ -1,8 +1,9 @@
-import { printingEditionConstants } from "./constants/printindEditions.constants";
+
 import { PrintingEdition } from "../printingEdition";
 import { EditionCurrency, PriceFilter, EditionType } from "../enums";
 import { ReactComponentElement } from "react";
 import { User } from "../user";
+import { OrderItem } from "../stateTypes/OrderState";
 
 export interface PrintingEditionsLoadedAction{
     type: "PRS_LOADED",
@@ -67,7 +68,11 @@ export interface ConfirmEmailPasswordAssistance{
     type:"CONFIRM_EMAIL",
     confirmEmail:boolean
 }
-
+export interface AddOrderItem{
+    type:"ADD_ORDER_ITEM",
+    orderItem:OrderItem
+}
+export type OrderActionTypes = AddOrderItem;
 export type ModalActionTypes = CloseModal | OpenModal;
 export type UserActionTypes = RegisterUser | SignInUser |LogOutUser |ConfirmEmailPasswordAssistance;
 

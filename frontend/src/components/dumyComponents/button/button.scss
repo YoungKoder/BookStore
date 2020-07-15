@@ -11,7 +11,6 @@
     }
 }
 .btn--solid{
-    background-color: $action;
     color:white;
 }
 .btn--outlined{
@@ -19,7 +18,12 @@
     border:2px solid  $action;
     color:#B9B8B7;
 }
-
+.btn--solid.btn--orange{
+    background-color: $action;
+}
+.btn--solid.btn--darken{
+    background-color:$header ;
+}
 .btn--regular{
     padding: .6rem 2rem;
 }

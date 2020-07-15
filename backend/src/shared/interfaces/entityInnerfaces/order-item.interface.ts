@@ -4,6 +4,6 @@ import {Document} from 'mongoose';
 export interface OrderItem extends Document{
     amount: number,
     currency:Currency,
-    printingEdition: PrintingEdition,
+    printingEdition: any,
     count: number
 }

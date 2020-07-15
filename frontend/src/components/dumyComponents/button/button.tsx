@@ -8,16 +8,18 @@ interface OwnProps{
     onClick:()=>void,
     variant?:"solid"|"outlined",
     size?:"regular"|"long",
-    disabled?:boolean
+    disabled?:boolean,
+    style?:"darken"|"orange"
 }
 
-export const Button:React.FC<OwnProps> = ({children,type,onClick,variant, size,disabled}:OwnProps)=>{
+export const Button:React.FC<OwnProps> = ({children,type,onClick,variant, style,size,disabled}:OwnProps)=>{
     let className = "";
 
     type = type===""?"button": type
 
     variant===undefined? className+="btn--solid ": className+= "btn--"+variant+" ";
-    size===undefined? className+="btn--regular" : className+= "btn--"+size+" ";
+    size===undefined? className+="btn--regular " : className+= "btn--"+size+" ";
+    style===undefined? className+="btn--orange " : className+= "btn--"+style+" ";
 
    return (
         <button className={"btn" + " " + className} onClick={onClick} type={type} disabled= { disabled}>

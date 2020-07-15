@@ -4,7 +4,7 @@ import { HomePage } from '../pages/homePage/homePage';
 import { Navbar } from '../dumyComponents/navbar/navbar';
 import 'font-awesome/css/font-awesome.min.css';
 import { Header } from '../dumyComponents/header/header';
-import { EditionCardInfo } from '../printingEditionCardInfo/editionCardInfo';
+import  {EditionCardInfo}  from '../printingEditionCardInfo/editionCardInfo';
 import ModalController from "../modalController/modalController";
 import store from '../../store';
 import SuccesConfirmEmail from '../confirmEmailSucces/confirmEmailSuccess';

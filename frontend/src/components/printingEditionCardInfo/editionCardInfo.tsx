@@ -4,19 +4,33 @@ import { printingEditionsService } from "../../services/printingEditionsService"
 import { OrderRow } from "../dumyComponents/cardInfoOrderRow/orderRow";
 
 import "./editionCardInfo.scss";
+import { Dispatch } from "redux";
+import { OrderItem } from "../../types/stateTypes/OrderState";
+import { addOrderItem } from "../../actions/orderActions/orderActions";
+import { connect, useDispatch } from "react-redux";
 
 interface OwnProps{
     matchedId:string
 }
+interface DispatchProps{
+    // addOrderItem:(itemOrder:OrderItem)=>void
+}
 
+type Props = DispatchProps & OwnProps;
 
-export const EditionCardInfo:React.FC<OwnProps> = (props:OwnProps)=>{
+export const EditionCardInfo:React.FC<Props> = (props:Props)=>{
+
+    const dispatch = useDispatch();
 
     const [curentEdition, setCurrentEdition] = useState<PrintingEdition>();
     useEffect(()=>{
         printingEditionsService.getEdition(props.matchedId)
         .then(res=>setCurrentEdition(res));
     },[]);
+
+    const addOrderItemDispatch = (orderItem:OrderItem)=>{
+        dispatch(addOrderItem(orderItem))
+    }
 
     return(
         <div className="container">
@@ -35,7 +49,7 @@ export const EditionCardInfo:React.FC<OwnProps> = (props:OwnProps)=>{
                                 return <p>{author.name}</p>
                             })}
                         </div>
-                        <OrderRow basePrice={curentEdition?.price}/>
+                        <OrderRow  title={curentEdition?.title} dispatchAction={addOrderItemDispatch} basePrice={curentEdition?.price}/>
                     </div>
                 </div>
             </div>
