@@ -6,6 +6,7 @@ import SignInForm  from "../../auth/signInForm";
 import  SignUpForm  from "../../auth/signUpForm";
 import { useDispatch } from "react-redux";
 import { modalOpen } from "../../../actions/modalsActions/modal.action";
+import { Cart } from "../../cart/cart";
 
 export const Navbar = ()=>{
     const dispatch = useDispatch();
@@ -24,9 +25,11 @@ export const Navbar = ()=>{
                         }))} className="fa fa-user" aria-hidden="true"></i>
                         </div>
                         <div className="basket">
-                            <Link className="basket-btn icon" to="/" data-badge="6">
-                                <i className="fa fa-shopping-basket" aria-hidden="true"></i>
-                            </Link>
+                            {/* <Link className="basket-btn icon" to="/" data-badge="6"> */}
+                                <i onClick={()=>dispatch(modalOpen({
+                                    content:<Cart/>
+                                }))} className="fa fa-shopping-basket" aria-hidden="true"></i>
+                            {/* </Link> */}
                         </div>
                     </div>
                 </div>

@@ -12,6 +12,7 @@ import { UserState } from "../../types/stateTypes/userState";
 import { Button } from "../dumyComponents/button/button";
 
 import "./confirmEmailSuccess.scss";
+import { loadUserFromLs } from "../../tools/savingStoreToLs";
 interface OwnProps{
 
 }
@@ -25,6 +26,7 @@ type Props = StateProps & OwnProps & DispathcProps;
 
 const SuccesConfirmEmail:React.SFC<Props> = (props:Props)=>{
     const [doesModalOpen,setModalOpen] = useState<boolean>(true);
+    const [user, setUser] = useState<User>();
     const history = useHistory();
     
     const closeModal = ()=>{
@@ -32,8 +34,9 @@ const SuccesConfirmEmail:React.SFC<Props> = (props:Props)=>{
         history.push("/");
     }
     useEffect(()=>{
-        console.log(`>>>user in state ${store.getState().user.user.first_name}`);
-        console.log(`>>>User:${props.user.first_name}`)
+        // console.log(`>>>user in state ${store.getState().user.user.first_name}`);
+        // console.log(`>>>User:${props.user.first_name}`)
+        setUser(loadUserFromLs());
     },[])
     return(
         <>
@@ -48,7 +51,7 @@ const SuccesConfirmEmail:React.SFC<Props> = (props:Props)=>{
                             {
                                 content: <div className="confirmEmailSuccess" >
                                     <div className="confirmEmailSuccess_text">
-                                        <p>Dear new {props.user.first_name} {props.user.last_name},</p> 
+                                        <p>Dear new {user?.first_name} {user?.last_name},</p> 
                                         <p>thank you for your registration</p>
                                     </div>
                                         

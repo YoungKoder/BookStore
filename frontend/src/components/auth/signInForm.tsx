@@ -15,18 +15,20 @@ import "./authForm.scss";
 import { FormWrapper } from "../dumyComponents/formWrapper/formWrapper";
 import { Button } from "../dumyComponents/button/button";
 import { useDispatch, connect } from "react-redux";
-import { modalOpen } from "../../actions/modalsActions/modal.action";
+import { modalOpen, closeModal } from "../../actions/modalsActions/modal.action";
 import SignUpForm  from "./signUpForm";
 import { User } from "../../types/user";
 import { signInUser } from "../../actions/userActions/userAction";
 import store from "../../store";
 import  ForgotPasswordForm  from "./forgotPassword";
+import { ModalTopBar } from "../dumyComponents/modalTopBarWithCloseButton/modalTopBar";
 
 const SignInInnerForm = (props:SignInFormProps & FormikProps<SignInUserData>)=>{
     const {touched, errors, isSubmitting} = props;
     const dispatch = useDispatch();
     return(
         <>
+            <ModalTopBar closeModal={closeModal}/>
             <FormWrapper isAuth = {true} title="Sign-In">
                 {
                     {
@@ -65,6 +67,7 @@ const SignInInnerForm = (props:SignInFormProps & FormikProps<SignInUserData>)=>{
                                     </Button>
                                 </div>
                             </Form>  
+                        
                     }
                 }
             </FormWrapper>

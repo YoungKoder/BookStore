@@ -6,8 +6,10 @@ import  SignInForm from "../auth/signInForm";
 import { RootState } from "../../store";
 import { closeModal, modalOpen } from "../../actions/modalsActions/modal.action";
 import { connect } from "react-redux";
+import { Cart } from "../cart/cart";
 
 interface OwnProps{
+    authForm?:boolean
 }
 
 interface DispatchProps{
@@ -19,10 +21,10 @@ interface StateProps{
     modal:ModalsState
 }
 
-type Props = StateProps & DispatchProps;
+type Props = StateProps & DispatchProps &OwnProps;
 const ModalController:React.SFC<Props> = (props:Props)=>{
     Modal.setAppElement("#root");
-    
+    // props.authForm ===undefined? props.authForm=true: props.authForm = props.authForm;
     return(
         <>
             {props.modal.modal.length>0? props.modal.modal.map((item,i)=><Modal
@@ -31,8 +33,7 @@ const ModalController:React.SFC<Props> = (props:Props)=>{
             className="Modal"
             key={i}
         >
-            <ModalTopBar closeModal={props.closeModal}/>
-            {item.content}
+            {item.content }
         </Modal>) : null }
         </>
     )

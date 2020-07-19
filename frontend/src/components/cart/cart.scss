@@ -1,0 +1,33 @@
+@import "../../assets/variables.scss";
+.cart{
+    &_wrapper{
+        width:1000px;
+        background:#fff;
+        height: 500px;
+    }
+    &_header{
+        padding:2rem 0;
+    }
+}
+.header{
+    &_stroke{
+        display: flex;
+        justify-content: space-between;
+        background:rgba($header, $alpha: .06);
+        padding: 1.5rem 0;
+        font-family:$headers;
+        font-size: 1.6rem;
+        & p{
+            color:#000;
+            font-weight: 600;
+            text-transform: uppercase;
+            opacity: 1;
+        }
+
+    }
+}
+.stroke{
+    &_subTitles{
+        font-size: 1.3rem;
+    }
+}

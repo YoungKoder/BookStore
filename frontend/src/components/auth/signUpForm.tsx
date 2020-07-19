@@ -20,6 +20,8 @@ import { connect } from "react-redux";
 import { User } from "../../types/user";
 import { signUpUser } from "../../actions/userActions/userAction";
 import store from "../../store";
+import { ModalTopBar } from "../dumyComponents/modalTopBarWithCloseButton/modalTopBar";
+import { savingUserToLocalStorage } from "../../tools/savingStoreToLs";
 
 interface SignUpFormProps{
     switchModal:(obj:Object)=>void,
@@ -31,6 +33,7 @@ const SignUpInnerForm = (props:SignUpFormProps& FormikProps<SignUpUserData>)=>{
     const dispatch = useDispatch();
     return(
         <>
+            <ModalTopBar closeModal={closeModal}/>
             <FormWrapper isAuth = {true} title="Create Acount">
                 {
                     {
@@ -130,7 +133,7 @@ const SignUpForm = withFormik<SignUpFormProps,SignUpUserData>({
             
             props.switchModal({content:<ConfirmEmail/>})
             props.signUpUser(user);
-            
+            savingUserToLocalStorage(user);
             setSubmitting(false);
             
         }catch{

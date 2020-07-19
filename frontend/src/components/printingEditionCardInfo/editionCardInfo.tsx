@@ -49,7 +49,7 @@ export const EditionCardInfo:React.FC<Props> = (props:Props)=>{
                                 return <p>{author.name}</p>
                             })}
                         </div>
-                        <OrderRow  title={curentEdition?.title} dispatchAction={addOrderItemDispatch} basePrice={curentEdition?.price}/>
+                        <OrderRow title={curentEdition?.title} dispatchAction={addOrderItemDispatch} basePrice={curentEdition?.price}/>
                     </div>
                 </div>
             </div>
